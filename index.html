@@ -1,0 +1,656 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Happiest Birthday ❤️</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3, #8e2de2);
+    }
+
+    /* ---------- PAGE ---------- */
+
+    .page {
+      position: absolute;
+      inset: 0;
+
+      display: none;
+      justify-content: center;
+      align-items: center;
+
+      padding: 20px;
+
+      text-align: center;
+
+      opacity: 0;
+      transform: translateX(40px);
+
+      transition: opacity 0.6s ease,
+                  transform 0.6s ease;
+    }
+
+    .page.active {
+      display: flex;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ---------- CARD ---------- */
+
+    .card {
+      width: 100%;
+      max-width: 650px;
+
+      padding: 40px 25px;
+
+      border-radius: 30px;
+
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(15px);
+
+      box-shadow:
+        0 15px 50px rgba(0,0,0,0.25);
+
+      animation: cardAppear 0.8s ease;
+    }
+
+    /* ---------- TEXT ---------- */
+
+    h1 {
+      font-size: clamp(2.2rem, 9vw, 4rem);
+      margin-bottom: 15px;
+
+      text-shadow:
+        0 0 10px rgba(255,255,255,0.8),
+        0 0 25px rgba(255,255,255,0.5);
+    }
+
+    h2 {
+      font-size: clamp(1.4rem, 6vw, 2.3rem);
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    /* ---------- EMOJIS ---------- */
+
+    .big-emoji {
+      font-size: 85px;
+      margin-bottom: 10px;
+
+      animation: bounce 1.5s infinite;
+    }
+
+    /* ---------- BUTTON ---------- */
+
+    button {
+      border: none;
+
+      padding: 15px 32px;
+
+      border-radius: 50px;
+
+      background: white;
+      color: #e84393;
+
+      font-size: 1rem;
+      font-weight: bold;
+
+      cursor: pointer;
+
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.08);
+      background: #fff0f7;
+    }
+
+    /* ---------- PAGE 3 PHOTOS ---------- */
+
+    .photos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 12px;
+
+      margin: 20px 0 30px;
+    }
+
+    .photo {
+      height: 170px;
+
+      border-radius: 18px;
+
+      overflow: hidden;
+
+      background: rgba(255,255,255,0.2);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      transition: transform 0.4s;
+    }
+
+    .photo img:hover {
+      transform: scale(1.08);
+    }
+
+    /* ---------- CONFETTI ---------- */
+
+    canvas {
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      z-index: 10;
+    }
+
+    /* ---------- HEARTS ---------- */
+
+    .heart {
+      position: fixed;
+
+      bottom: -40px;
+
+      font-size: 25px;
+
+      pointer-events: none;
+
+      animation: heartFloat 5s linear forwards;
+
+      z-index: 5;
+    }
+
+    /* ---------- ANIMATIONS ---------- */
+
+    @keyframes cardAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    @keyframes heartFloat {
+      0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- MOBILE ---------- */
+
+    @media (max-width: 480px) {
+
+      .card {
+        padding: 30px 18px;
+      }
+
+      .big-emoji {
+        font-size: 65px;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      .photo {
+        height: 135px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- CONFETTI -->
+  <canvas id="confetti"></canvas>
+
+
+  <!-- ================= PAGE 1 ================= -->
+
+  <section class="page active" id="page1">
+
+    <div class="card">
+
+      <div class="big-emoji">🎂</div>
+
+      <h1>Happiest Birthday</h1>
+
+      <h2>Dr. Monika Bisht ❤️</h2>
+
+      <p>
+        Today is not just another day...
+
+        <br><br>
+
+        It's the day someone very special was born. ✨
+
+        <br><br>
+
+        So this little surprise is just for you. 💖
+      </p>
+
+      <button onclick="nextPage()">
+        Start the Surprise 🎁
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PAGE 2 ================= -->
+
+  <section class="page" id="page2">
+
+    <div class="card">
+
+      <div class="big-emoji">💌</div>
+
+      <h1>A Little Message</h1>
+
+      <p>
+
+        Some people enter our lives and somehow make
+        ordinary moments feel a little more special. ✨
+
+        <br><br>
+
+        On your birthday, I just want to wish you
+        happiness that stays, smiles that never fade,
+        and countless beautiful moments ahead. ❤️
+
+        <br><br>
+
+        May this new chapter of your life be
+        absolutely amazing. 🌸
+
+      </p>
+
+      <button onclick="nextPage()">
+        Next Surprise ✨
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PAGE 3 ================= -->
+
+  <section class="page" id="page3">
+
+    <div class="card">
+
+      <h1>📸 Memories</h1>
+
+      <p>
+        Every beautiful memory deserves a little
+        place here. ❤️
+      </p>
+
+      <div class="photos">
+
+        <!-- Replace these with your own photos -->
+
+        <div class="photo">
+          <img
+            src="Er.vashu1.jpeg"
+            alt="Memory">
+        </div>
+
+        <div class="photo">
+          <img
+            src="Er.vashu2.jpg"
+            alt="Memory">
+        </div>
+
+        <div class="photo">
+          <img
+            src="Er.vashu3.jpeg"
+            alt="Memory">
+        </div>
+
+        <div class="photo">
+          <img
+            src="Er.vashu4.jpg"
+            alt="Memory">
+        </div>
+
+      </div>
+
+      <button onclick="nextPage()">
+        One Last Surprise 🎁
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PAGE 4 ================= -->
+
+  <section class="page" id="page4">
+
+    <div class="card">
+
+      <div class="big-emoji">🎂</div>
+
+      <h1>Happiest Birthday! 🎉</h1>
+
+      <h2>Dr. Monika Bisht ❤️</h2>
+
+      <p>
+
+        May you always have reasons to smile,
+
+        <br>
+
+        people who genuinely care about you,
+
+        <br>
+
+        and dreams that turn into beautiful realities. ✨
+
+        <br><br>
+
+        Keep smiling. Keep shining.
+
+        <br>
+
+        And have the most amazing birthday ever! 🥳💖
+
+      </p>
+
+      <button onclick="celebrate()">
+        🎊 Celebrate Again 🎊
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <script>
+
+    /* ==================================================
+       PAGE NAVIGATION
+    ================================================== */
+
+    let currentPage = 1;
+
+    function nextPage() {
+
+      if (currentPage >= 4) {
+        celebrate();
+        return;
+      }
+
+      document
+        .getElementById("page" + currentPage)
+        .classList.remove("active");
+
+      currentPage++;
+
+      document
+        .getElementById("page" + currentPage)
+        .classList.add("active");
+
+      createHearts();
+
+      if (currentPage === 4) {
+        createConfetti();
+      }
+    }
+
+
+    /* ==================================================
+       HEARTS
+    ================================================== */
+
+    function createHearts() {
+
+      for (let i = 0; i < 10; i++) {
+
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+
+        heart.innerHTML =
+          ["❤️", "💖", "💕", "💗", "💝"]
+          [Math.floor(Math.random() * 5)];
+
+        heart.style.left =
+          Math.random() * 100 + "vw";
+
+        heart.style.animationDelay =
+          Math.random() * 2 + "s";
+
+        heart.style.fontSize =
+          Math.random() * 20 + 20 + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 6000);
+      }
+    }
+
+
+    /* ==================================================
+       CONFETTI
+    ================================================== */
+
+    const canvas =
+      document.getElementById("confetti");
+
+    const ctx =
+      canvas.getContext("2d");
+
+    let pieces = [];
+
+
+    function resizeCanvas() {
+
+      canvas.width =
+        window.innerWidth;
+
+      canvas.height =
+        window.innerHeight;
+    }
+
+
+    window.addEventListener(
+      "resize",
+      resizeCanvas
+    );
+
+    resizeCanvas();
+
+
+    function createConfetti() {
+
+      pieces = [];
+
+      for (let i = 0; i < 250; i++) {
+
+        pieces.push({
+
+          x: Math.random() * canvas.width,
+
+          y: Math.random() * -canvas.height,
+
+          size: Math.random() * 9 + 4,
+
+          speed: Math.random() * 5 + 2,
+
+          angle: Math.random() * 360,
+
+          rotation: Math.random() * 10 - 5,
+
+          color: [
+
+            "#ffffff",
+            "#ffd32a",
+            "#18dcff",
+            "#7bed9f",
+            "#e056fd",
+            "#ff4757"
+
+          ][Math.floor(Math.random() * 6)]
+
+        });
+
+      }
+
+    }
+
+
+    function drawConfetti() {
+
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+
+      pieces.forEach(piece => {
+
+        ctx.save();
+
+        ctx.translate(
+          piece.x,
+          piece.y
+        );
+
+        ctx.rotate(
+          piece.angle *
+          Math.PI / 180
+        );
+
+        ctx.fillStyle =
+          piece.color;
+
+        ctx.fillRect(
+
+          -piece.size / 2,
+
+          -piece.size / 2,
+
+          piece.size,
+
+          piece.size * 0.6
+
+        );
+
+        ctx.restore();
+
+
+        piece.y += piece.speed;
+
+        piece.x +=
+          Math.sin(piece.y * 0.02) * 1.5;
+
+        piece.angle +=
+          piece.rotation;
+
+
+        if (
+          piece.y >
+          canvas.height + 20
+        ) {
+
+          piece.y = -20;
+
+          piece.x =
+            Math.random() *
+            canvas.width;
+        }
+
+      });
+
+
+      requestAnimationFrame(
+        drawConfetti
+      );
+    }
+
+
+    function celebrate() {
+
+      createConfetti();
+
+      createHearts();
+
+    }
+
+
+    /* START */
+
+    createConfetti();
+
+    drawConfetti();
+
+  </script>
+
+</body>
+</html>
+```
