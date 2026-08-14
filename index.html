@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +21,34 @@
       background: linear-gradient(135deg, #ff758c, #ff7eb3, #8e2de2);
     }
 
-    /* ---------- PAGE ---------- */
+    /* ================= MUSIC BUTTON ================= */
+
+    .music-btn {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 20;
+
+      width: 48px;
+      height: 48px;
+
+      border: none;
+      border-radius: 50%;
+
+      background: rgba(255,255,255,0.9);
+      color: #e84393;
+
+      font-size: 20px;
+      cursor: pointer;
+
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    .music-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* ================= PAGES ================= */
 
     .page {
       position: absolute;
@@ -39,8 +65,9 @@
       opacity: 0;
       transform: translateX(40px);
 
-      transition: opacity 0.6s ease,
-                  transform 0.6s ease;
+      transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
     }
 
     .page.active {
@@ -49,7 +76,7 @@
       transform: translateX(0);
     }
 
-    /* ---------- CARD ---------- */
+    /* ================= CARD ================= */
 
     .card {
       width: 100%;
@@ -60,6 +87,7 @@
       border-radius: 30px;
 
       background: rgba(255,255,255,0.15);
+
       backdrop-filter: blur(15px);
 
       box-shadow:
@@ -68,7 +96,7 @@
       animation: cardAppear 0.8s ease;
     }
 
-    /* ---------- TEXT ---------- */
+    /* ================= TEXT ================= */
 
     h1 {
       font-size: clamp(2.2rem, 9vw, 4rem);
@@ -90,7 +118,7 @@
       margin-bottom: 30px;
     }
 
-    /* ---------- EMOJIS ---------- */
+    /* ================= EMOJI ================= */
 
     .big-emoji {
       font-size: 85px;
@@ -99,7 +127,7 @@
       animation: bounce 1.5s infinite;
     }
 
-    /* ---------- BUTTON ---------- */
+    /* ================= BUTTON ================= */
 
     button {
       border: none;
@@ -116,7 +144,8 @@
 
       cursor: pointer;
 
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      box-shadow:
+        0 5px 20px rgba(0,0,0,0.2);
 
       transition: 0.3s;
     }
@@ -126,7 +155,7 @@
       background: #fff0f7;
     }
 
-    /* ---------- PAGE 3 PHOTOS ---------- */
+    /* ================= PHOTOS ================= */
 
     .photos {
       display: grid;
@@ -160,7 +189,7 @@
       transform: scale(1.08);
     }
 
-    /* ---------- CONFETTI ---------- */
+    /* ================= CONFETTI ================= */
 
     canvas {
       position: fixed;
@@ -171,7 +200,7 @@
       z-index: 10;
     }
 
-    /* ---------- HEARTS ---------- */
+    /* ================= HEARTS ================= */
 
     .heart {
       position: fixed;
@@ -187,9 +216,10 @@
       z-index: 5;
     }
 
-    /* ---------- ANIMATIONS ---------- */
+    /* ================= ANIMATIONS ================= */
 
     @keyframes cardAppear {
+
       from {
         opacity: 0;
         transform: scale(0.8);
@@ -199,9 +229,11 @@
         opacity: 1;
         transform: scale(1);
       }
+
     }
 
     @keyframes bounce {
+
       0%, 100% {
         transform: translateY(0);
       }
@@ -209,9 +241,11 @@
       50% {
         transform: translateY(-15px);
       }
+
     }
 
     @keyframes heartFloat {
+
       0% {
         transform: translateY(0) rotate(0);
         opacity: 0;
@@ -222,12 +256,16 @@
       }
 
       100% {
-        transform: translateY(-110vh) rotate(360deg);
+        transform:
+          translateY(-110vh)
+          rotate(360deg);
+
         opacity: 0;
       }
+
     }
 
-    /* ---------- MOBILE ---------- */
+    /* ================= MOBILE ================= */
 
     @media (max-width: 480px) {
 
@@ -250,6 +288,7 @@
       .photo {
         height: 135px;
       }
+
     }
 
   </style>
@@ -257,23 +296,95 @@
 
 <body>
 
+
+  <!-- ==================================================
+       BACKGROUND MUSIC
+  ================================================== -->
+
+  <audio id="bgMusic" loop preload="auto">
+    <source src="birthday.mp3" type="audio/mpeg">
+  </audio>
+
+
+  <!-- MUSIC BUTTON -->
+
+  <button
+    class="music-btn"
+    id="musicButton"
+    onclick="toggleMusic()"
+    title="Music"
+  >
+    🔇
+  </button>
+
+
   <!-- CONFETTI -->
+
   <canvas id="confetti"></canvas>
 
 
-  <!-- ================= PAGE 1 ================= -->
+  <!-- ==================================================
+       INTRO PAGE — NEW PAGE 0
+  ================================================== -->
 
-  <section class="page active" id="page1">
+  <section class="page active" id="introPage">
 
     <div class="card">
 
-      <div class="big-emoji">🎂</div>
+      <div class="big-emoji">
+        👑
+      </div>
 
-      <h1>Happiest Birthday</h1>
-
-      <h2>Dr. Monika Bisht ❤️</h2>
+      <h1>
+        Hey Princess ❤️
+      </h1>
 
       <p>
+
+        I have something special for you...
+
+        <br><br>
+
+        A little surprise,
+        made just for you. ✨
+
+        <br><br>
+
+        Are you ready? 💖
+
+      </p>
+
+      <button onclick="startBirthday()">
+        Click Here 💖
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       PAGE 1 — BIRTHDAY
+  ================================================== -->
+
+  <section class="page" id="page1">
+
+    <div class="card">
+
+      <div class="big-emoji">
+        🎂
+      </div>
+
+      <h1>
+        Happiest Birthday
+      </h1>
+
+      <h2>
+        Dr. Monika Bisht ❤️
+      </h2>
+
+      <p>
+
         Today is not just another day...
 
         <br><br>
@@ -283,6 +394,7 @@
         <br><br>
 
         So this little surprise is just for you. 💖
+
       </p>
 
       <button onclick="nextPage()">
@@ -294,15 +406,21 @@
   </section>
 
 
-  <!-- ================= PAGE 2 ================= -->
+  <!-- ==================================================
+       PAGE 2 — MESSAGE
+  ================================================== -->
 
   <section class="page" id="page2">
 
     <div class="card">
 
-      <div class="big-emoji">💌</div>
+      <div class="big-emoji">
+        💌
+      </div>
 
-      <h1>A Little Message</h1>
+      <h1>
+        A Little Message
+      </h1>
 
       <p>
 
@@ -331,13 +449,17 @@
   </section>
 
 
-  <!-- ================= PAGE 3 ================= -->
+  <!-- ==================================================
+       PAGE 3 — MEMORIES
+  ================================================== -->
 
   <section class="page" id="page3">
 
     <div class="card">
 
-      <h1>📸 Memories</h1>
+      <h1>
+        📸 Memories
+      </h1>
 
       <p>
         Every beautiful memory deserves a little
@@ -345,8 +467,6 @@
       </p>
 
       <div class="photos">
-
-        <!-- Replace these with your own photos -->
 
         <div class="photo">
           <img
@@ -383,17 +503,25 @@
   </section>
 
 
-  <!-- ================= PAGE 4 ================= -->
+  <!-- ==================================================
+       PAGE 4 — FINAL
+  ================================================== -->
 
   <section class="page" id="page4">
 
     <div class="card">
 
-      <div class="big-emoji">🎂</div>
+      <div class="big-emoji">
+        🎂
+      </div>
 
-      <h1>Happiest Birthday! 🎉</h1>
+      <h1>
+        Happiest Birthday! 🎉
+      </h1>
 
-      <h2>Dr. Monika Bisht ❤️</h2>
+      <h2>
+        Dr. Monika Bisht ❤️
+      </h2>
 
       <p>
 
@@ -429,33 +557,119 @@
   <script>
 
     /* ==================================================
-       PAGE NAVIGATION
+       VARIABLES
     ================================================== */
 
     let currentPage = 1;
 
+    const music =
+      document.getElementById("bgMusic");
+
+    const musicButton =
+      document.getElementById("musicButton");
+
+
+    /* ==================================================
+       INTRO → START BIRTHDAY + MUSIC
+    ================================================== */
+
+    function startBirthday() {
+
+      music.volume = 0.5;
+
+      music.play()
+        .then(() => {
+
+          musicButton.innerHTML = "🔊";
+
+        })
+        .catch(() => {
+
+          musicButton.innerHTML = "🔇";
+
+        });
+
+
+      document
+        .getElementById("introPage")
+        .classList.remove("active");
+
+
+      document
+        .getElementById("page1")
+        .classList.add("active");
+
+
+      currentPage = 1;
+
+      createHearts();
+
+    }
+
+
+    /* ==================================================
+       MUSIC ON / OFF
+    ================================================== */
+
+    function toggleMusic() {
+
+      if (music.paused) {
+
+        music.play()
+          .then(() => {
+
+            musicButton.innerHTML = "🔊";
+
+          });
+
+      } else {
+
+        music.pause();
+
+        musicButton.innerHTML = "🔇";
+
+      }
+
+    }
+
+
+    /* ==================================================
+       PAGE NAVIGATION
+    ================================================== */
+
     function nextPage() {
 
       if (currentPage >= 4) {
+
         celebrate();
+
         return;
+
       }
+
 
       document
         .getElementById("page" + currentPage)
         .classList.remove("active");
 
+
       currentPage++;
+
 
       document
         .getElementById("page" + currentPage)
         .classList.add("active");
 
+
       createHearts();
 
+
       if (currentPage === 4) {
+
         createConfetti();
+
       }
+
     }
 
 
@@ -467,7 +681,8 @@
 
       for (let i = 0; i < 10; i++) {
 
-        const heart = document.createElement("div");
+        const heart =
+          document.createElement("div");
 
         heart.className = "heart";
 
@@ -475,21 +690,30 @@
           ["❤️", "💖", "💕", "💗", "💝"]
           [Math.floor(Math.random() * 5)];
 
+
         heart.style.left =
           Math.random() * 100 + "vw";
+
 
         heart.style.animationDelay =
           Math.random() * 2 + "s";
 
+
         heart.style.fontSize =
           Math.random() * 20 + 20 + "px";
 
+
         document.body.appendChild(heart);
 
+
         setTimeout(() => {
+
           heart.remove();
+
         }, 6000);
+
       }
+
     }
 
 
@@ -503,6 +727,7 @@
     const ctx =
       canvas.getContext("2d");
 
+
     let pieces = [];
 
 
@@ -513,6 +738,7 @@
 
       canvas.height =
         window.innerHeight;
+
     }
 
 
@@ -521,6 +747,7 @@
       resizeCanvas
     );
 
+
     resizeCanvas();
 
 
@@ -528,32 +755,44 @@
 
       pieces = [];
 
+
       for (let i = 0; i < 250; i++) {
 
         pieces.push({
 
-          x: Math.random() * canvas.width,
+          x:
+            Math.random() *
+            canvas.width,
 
-          y: Math.random() * -canvas.height,
+          y:
+            Math.random() *
+            -canvas.height,
 
-          size: Math.random() * 9 + 4,
+          size:
+            Math.random() * 9 + 4,
 
-          speed: Math.random() * 5 + 2,
+          speed:
+            Math.random() * 5 + 2,
 
-          angle: Math.random() * 360,
+          angle:
+            Math.random() * 360,
 
-          rotation: Math.random() * 10 - 5,
+          rotation:
+            Math.random() * 10 - 5,
 
-          color: [
-
-            "#ffffff",
-            "#ffd32a",
-            "#18dcff",
-            "#7bed9f",
-            "#e056fd",
-            "#ff4757"
-
-          ][Math.floor(Math.random() * 6)]
+          color:
+            [
+              "#ffffff",
+              "#ffd32a",
+              "#18dcff",
+              "#7bed9f",
+              "#e056fd",
+              "#ff4757"
+            ][
+              Math.floor(
+                Math.random() * 6
+              )
+            ]
 
         });
 
@@ -583,7 +822,8 @@
 
         ctx.rotate(
           piece.angle *
-          Math.PI / 180
+          Math.PI /
+          180
         );
 
         ctx.fillStyle =
@@ -604,10 +844,15 @@
         ctx.restore();
 
 
-        piece.y += piece.speed;
+        piece.y +=
+          piece.speed;
+
 
         piece.x +=
-          Math.sin(piece.y * 0.02) * 1.5;
+          Math.sin(
+            piece.y * 0.02
+          ) * 1.5;
+
 
         piece.angle +=
           piece.rotation;
@@ -623,6 +868,7 @@
           piece.x =
             Math.random() *
             canvas.width;
+
         }
 
       });
@@ -631,8 +877,13 @@
       requestAnimationFrame(
         drawConfetti
       );
+
     }
 
+
+    /* ==================================================
+       FINAL CELEBRATION
+    ================================================== */
 
     function celebrate() {
 
@@ -643,7 +894,7 @@
     }
 
 
-    /* START */
+    /* START CONFETTI */
 
     createConfetti();
 
@@ -653,4 +904,3 @@
 
 </body>
 </html>
-```
