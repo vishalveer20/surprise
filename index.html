@@ -10,7 +10,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html, body { width: 100%; height: 100%; overflow: hidden; }
+html, body { width: 100%; min-height: 100%; overflow-x: hidden; overflow-y: auto; }
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -86,7 +86,8 @@ audio { display: none; }
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     opacity: 0;
     visibility: hidden;
     transform: translateX(35px);
@@ -105,8 +106,8 @@ audio { display: none; }
 .card {
     position: relative;
     width: min(720px, 100%);
-    max-height: calc(100dvh - 30px);
-    overflow: hidden;
+    max-height: none;
+    overflow: visible;
     padding: 35px 30px;
     text-align: center;
     border: 1px solid rgba(255,255,255,.18);
@@ -371,8 +372,7 @@ p {
    MEMORIES PAGE FIX
 ===================================================== */
 
-#page4 .card { padding: 22px 24px; max-height: calc(100dvh - 20px); overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
-#page4 .card::-webkit-scrollbar { display: none; }
+#page4 .card { padding: 22px 24px; max-height: none; overflow: visible; }
 #page4 .icon { width: 58px; height: 58px; font-size: 28px; margin-bottom: 8px; }
 #page4 .kicker { margin-bottom: 5px; }
 #page4 h1 { font-size: 3.8rem; margin-bottom: 7px; }
@@ -467,7 +467,7 @@ p {
 
 @media (max-width: 600px) {
 
-    .page { height: 100dvh; min-height: 100dvh; padding: 8px; overflow: hidden; }
+    .page { height: 100dvh; min-height: 100dvh; padding: 8px; overflow-x: hidden; overflow-y: auto; }
     .card { width: 100%; max-height: calc(100dvh - 16px); padding: 24px 17px; border-radius: 25px; }
     .icon { width: 68px; height: 68px; font-size: 32px; margin-bottom: 13px; }
     .birthday-dp { width: 92px; height: 92px; margin-bottom: 13px; }
@@ -481,7 +481,7 @@ p {
     .progress { bottom: 7px; }
 
     /* MOBILE MEMORIES FIX */
-    #page4 .card { padding: 17px 14px; max-height: calc(100dvh - 16px); padding-bottom: 12px; }
+    #page4 .card { padding: 17px 14px; max-height: none; padding-bottom: 12px; }
     #page4 .icon { width: 52px; height: 52px; font-size: 25px; margin-bottom: 6px; }
     #page4 .kicker { font-size: .58rem; margin-bottom: 4px; }
     #page4 h1 { font-size: 2.8rem; margin-bottom: 5px; }
@@ -532,36 +532,6 @@ p {
    NEW: MUSIC TOGGLE BUTTON
 ===================================================== */
 
-.music-toggle {
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    z-index: 300;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.12);
-    border: 1px solid rgba(255,255,255,.28);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 19px;
-    cursor: pointer;
-    transition: transform .3s ease, box-shadow .3s ease;
-}
-
-.music-toggle:hover { transform: scale(1.1); }
-
-.music-toggle.playing {
-    animation: musicPulse 1.8s ease-in-out infinite;
-}
-
-@keyframes musicPulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(255,111,174,.5); }
-    50%      { box-shadow: 0 0 0 9px rgba(255,111,174,0); }
-}
 
 /* =====================================================
    NEW: TYPEWRITER EFFECT
@@ -640,71 +610,6 @@ p {
    NEW: LOVE METER PAGE
 ===================================================== */
 
-.love-meter-wrap { width: 100%; margin: 25px 0 5px; }
-
-.love-meter-emoji {
-    font-size: 2.4rem;
-    transition: transform .2s ease;
-}
-
-.love-meter-track {
-    position: relative;
-    width: 100%;
-    height: 14px;
-    border-radius: 20px;
-    background: rgba(255,255,255,.15);
-    overflow: hidden;
-    margin-top: 12px;
-}
-
-.love-meter-fill {
-    height: 100%;
-    width: 0%;
-    border-radius: 20px;
-    background: linear-gradient(90deg, #ff4f9a, #a855f7, #ff9ed0);
-    background-size: 200% auto;
-    animation: shine 3s linear infinite;
-    transition: width .15s ease;
-}
-
-.love-meter-label {
-    font-size: .85rem;
-    margin-top: 10px;
-    min-height: 1.3em;
-    opacity: .9;
-}
-
-input[type=range].love-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 6px;
-    border-radius: 10px;
-    background: rgba(255,255,255,.2);
-    margin-top: 20px;
-    outline: none;
-}
-
-input[type=range].love-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 0 15px #ff6fae;
-    cursor: pointer;
-    border: 3px solid #ff4f9a;
-}
-
-input[type=range].love-slider::-moz-range-thumb {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 0 15px #ff6fae;
-    cursor: pointer;
-    border: 3px solid #ff4f9a;
-}
 
 /* =====================================================
    NEW: SCRATCH CARD PAGE
@@ -799,8 +704,347 @@ input[type=range].love-slider::-moz-range-thumb {
     .reasons-grid { grid-template-columns: repeat(3, 1fr); gap: 7px; margin: 16px 0 4px; }
     .flip-card-front { font-size: 21px; }
     .flip-card-back { font-size: .58rem; }
-    .music-toggle { width: 40px; height: 40px; font-size: 16px; top: 10px; right: 10px; }
     .scratch-wrap { height: 180px; }
+}
+
+/* =====================================================
+   NEW: QUIZ PAGE
+===================================================== */
+
+#quizPage .card { padding: 26px 22px; }
+
+.quiz-progress {
+    font-size: .75rem;
+    opacity: .7;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+}
+
+.quiz-question {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    margin: 8px 0 18px;
+    min-height: 2.4em;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.quiz-option {
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    text-align: left;
+    font-size: .9rem;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.quiz-option:hover { background: rgba(255,255,255,.16); transform: translateX(3px); }
+.quiz-option.correct { background: rgba(80,220,150,.35); border-color: #4ee6a3; }
+.quiz-option.wrong { background: rgba(255,80,110,.3); border-color: #ff5c7a; }
+.quiz-option.disabled { pointer-events: none; opacity: .75; }
+
+.quiz-score-badge {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff4f9a, #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 8px 0;
+}
+
+/* =====================================================
+   NEW: MEMORY MATCH GAME
+===================================================== */
+
+.match-stats {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    font-size: .8rem;
+    opacity: .85;
+    margin-bottom: 14px;
+}
+
+.match-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 4px 0 14px;
+    perspective: 800px;
+}
+
+.match-card {
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+}
+
+.match-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform .5s cubic-bezier(.4,.2,.2,1);
+    transform-style: preserve-3d;
+}
+
+.match-card.flipped .match-card-inner,
+.match-card.matched .match-card-inner { transform: rotateY(180deg); }
+
+.match-card-front, .match-card-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    border: 1px solid rgba(255,255,255,.2);
+}
+
+.match-card-front { background: linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.04)); }
+.match-card-back {
+    background: linear-gradient(135deg, #ff4f9a, #a855f7);
+    transform: rotateY(180deg);
+}
+.match-card.matched .match-card-back { background: linear-gradient(135deg, #4ee6a3, #2dd4bf); }
+
+/* =====================================================
+   NEW: TAP THE HEARTS GAME
+===================================================== */
+
+.tap-arena {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.15);
+    overflow: hidden;
+    margin: 10px 0 16px;
+}
+
+.tap-heart {
+    position: absolute;
+    font-size: 26px;
+    cursor: pointer;
+    user-select: none;
+    animation: tapHeartPop .35s ease;
+}
+
+@keyframes tapHeartPop {
+    from { transform: scale(0); }
+    to   { transform: scale(1); }
+}
+
+.tap-hud {
+    display: flex;
+    justify-content: space-between;
+    font-size: .85rem;
+    margin-bottom: 6px;
+    opacity: .9;
+}
+
+/* =====================================================
+   NEW: PUZZLE PAGE
+===================================================== */
+
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    width: min(260px, 70vw);
+    aspect-ratio: 1/1;
+    margin: 14px auto;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.2);
+}
+
+.puzzle-piece {
+    background-size: 300% 300%;
+    cursor: pointer;
+    transition: outline .2s ease;
+}
+
+.puzzle-piece.selected { outline: 3px solid #ff6fae; outline-offset: -3px; }
+
+/* =====================================================
+   NEW: ZODIAC / FACTS PAGE
+===================================================== */
+
+.zodiac-symbol {
+    font-size: 3.5rem;
+    margin: 4px 0;
+}
+
+.fact-list {
+    text-align: left;
+    font-size: .85rem;
+    line-height: 1.7;
+    margin: 14px 0;
+    padding-left: 4px;
+}
+
+.fact-list li { margin-bottom: 6px; list-style: none; }
+.fact-list li::before { content: "✨ "; }
+
+/* =====================================================
+   NEW: CANDLE BLOW PAGE
+===================================================== */
+
+.cake-wrap {
+    position: relative;
+    margin: 20px auto 10px;
+    width: 160px;
+}
+
+.candle-flame {
+    width: 14px;
+    height: 26px;
+    margin: 0 auto;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: radial-gradient(circle at 50% 70%, #fff59e, #ff9d3d 60%, #ff5c3d);
+    box-shadow: 0 0 18px #ffb347, 0 0 35px rgba(255,150,50,.5);
+    animation: flicker 1.1s ease-in-out infinite;
+    transform-origin: bottom center;
+    transition: opacity .4s ease, transform .4s ease;
+}
+
+@keyframes flicker {
+    0%, 100% { transform: scale(1) rotate(-2deg); }
+    50% { transform: scale(1.08) rotate(2deg); }
+}
+
+.candle-flame.out {
+    opacity: 0;
+    transform: scale(0.2) translateY(10px);
+}
+
+.candle-stick {
+    width: 10px;
+    height: 36px;
+    margin: -2px auto 0;
+    background: repeating-linear-gradient(45deg, #ff9ed0, #ff9ed0 4px, #ffd4ea 4px, #ffd4ea 8px);
+    border-radius: 2px;
+}
+
+.cake-body {
+    width: 160px;
+    height: 90px;
+    margin-top: -2px;
+    border-radius: 10px 10px 26px 26px;
+    background: linear-gradient(180deg, #fff0dd, #f5c98d 40%, #e0a565);
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+.cake-body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 14px;
+    background: repeating-linear-gradient(90deg, #ff8fc4, #ff8fc4 10px, #fff 10px, #fff 20px);
+    border-radius: 10px 10px 0 0;
+}
+
+.blow-hint { font-size: .8rem; opacity: .75; margin-top: 12px; min-height: 1.3em; }
+.blow-meter-track {
+    width: 100%;
+    height: 8px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.15);
+    overflow: hidden;
+    margin-top: 10px;
+}
+.blow-meter-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff9d3d, #ff4f9a);
+    transition: width .1s ease;
+}
+
+/* =====================================================
+   NEW: PHOTO CAROUSEL (replaces static memory grid)
+===================================================== */
+
+.carousel-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 260px;
+    margin: 10px auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,.4);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform .5s cubic-bezier(.4,.2,.2,1);
+}
+
+.carousel-track img {
+    width: 100%;
+    flex-shrink: 0;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    cursor: zoom-in;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.carousel-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.3);
+    transition: .3s;
+}
+
+.carousel-dots span.active { background: #ff6fae; width: 18px; border-radius: 5px; }
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.4);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    backdrop-filter: blur(4px);
+}
+
+.carousel-arrow.left { left: 8px; }
+.carousel-arrow.right { right: 8px; }
+
+/* =====================================================
+   NEW: FALLING PETALS (global canvas overlay)
+===================================================== */
+
+#petalsCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
 }
 </style>
 </head>
@@ -824,9 +1068,6 @@ input[type=range].love-slider::-moz-range-thumb {
 <!-- ================= CONFETTI ================= -->
 <canvas id="confetti"></canvas>
 
-<!-- ================= MUSIC TOGGLE ================= -->
-<div class="music-toggle" id="musicToggle" onclick="toggleMusic()">🔇</div>
-
 <!-- ================= CURSOR TRAIL (desktop) ================= -->
 <div class="cursor-dot" id="cursorDot"></div>
 
@@ -835,6 +1076,9 @@ input[type=range].love-slider::-moz-range-thumb {
     <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
     <img id="lightboxImg" src="" alt="Memory">
 </div>
+
+<!-- ================= FALLING PETALS ================= -->
+<canvas id="petalsCanvas"></canvas>
 
 <!-- =====================================================
      PAGE 0 — INTRO
@@ -952,6 +1196,30 @@ input[type=range].love-slider::-moz-range-thumb {
 </section>
 
 <!-- =====================================================
+     NEW PAGE — QUIZ
+===================================================== -->
+<section class="page" id="quizPage">
+    <div class="card">
+        <div class="icon">❓</div>
+        <div class="kicker">Test Time</div>
+        <h1>Kitna Jaante Ho Mujhe?</h1>
+
+        <div id="quizContainer">
+            <div class="quiz-progress" id="quizProgress">Question 1 / 5</div>
+            <div class="quiz-question" id="quizQuestionText"></div>
+            <div class="quiz-options" id="quizOptions"></div>
+        </div>
+
+        <div id="quizResult" style="display:none;">
+            <div class="quiz-score-badge" id="quizScoreBadge">0/5</div>
+            <p id="quizScoreMsg">Result...</p>
+            <button class="btn" onclick="restartQuiz()" style="margin-right:8px;">Retry 🔁</button>
+            <button class="btn" onclick="nextPage()">Continue ➜</button>
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
      PAGE 3 — DRAG PAPER MEMORY
 ===================================================== -->
 <section class="page" id="paperPage">
@@ -1009,28 +1277,53 @@ input[type=range].love-slider::-moz-range-thumb {
 <!-- =====================================================
      NEW PAGE — INTERACTIVE LOVE METER
 ===================================================== -->
-<section class="page" id="loveMeterPage">
-    <div class="card">
-        <div class="icon">💗</div>
-        <div class="kicker">Slide To Find Out</div>
-        <h1>Love Meter</h1>
-        <p>Drag the slider and see the magic number. 😉</p>
 
-        <div class="love-meter-wrap">
-            <div class="love-meter-emoji" id="loveEmoji">🙂</div>
-            <input type="range" min="0" max="100" value="0" class="love-slider" id="loveSlider" oninput="updateLoveMeter(this.value)">
-            <div class="love-meter-track">
-                <div class="love-meter-fill" id="loveFill"></div>
-            </div>
-            <div class="love-meter-label" id="loveLabel">Move the slider...</div>
+<!-- =====================================================
+     NEW PAGE — MEMORY MATCH GAME
+===================================================== -->
+<section class="page" id="matchGamePage">
+    <div class="card">
+        <div class="icon">🧩</div>
+        <div class="kicker">Match The Pairs</div>
+        <h1>Memory Game</h1>
+
+        <div class="match-stats">
+            <span>Moves: <b id="matchMoves">0</b></span>
+            <span>Pairs: <b id="matchPairs">0</b>/8</span>
         </div>
 
-        <button class="btn" onclick="nextPage()">Next ➜</button>
+        <div class="match-grid" id="matchGrid"></div>
+
+        <div id="matchWinMsg" style="display:none; margin-bottom:10px;">🎉 All matched! You're a champ.</div>
+        <button class="btn" onclick="nextPage()">Continue ➜</button>
     </div>
 </section>
 
 <!-- =====================================================
-     PAGE 4 — MEMORIES
+     NEW PAGE — TAP THE HEARTS GAME
+===================================================== -->
+<section class="page" id="tapHeartsPage">
+    <div class="card">
+        <div class="icon">💘</div>
+        <div class="kicker">Quick Game</div>
+        <h1>Tap The Hearts</h1>
+        <p>Tap as many hearts as you can in 15 seconds!</p>
+
+        <div class="tap-hud">
+            <span>Score: <b id="tapScore">0</b></span>
+            <span>Time: <b id="tapTime">15</b>s</span>
+        </div>
+
+        <div class="tap-arena" id="tapArena">
+            <button class="btn" id="tapStartBtn" onclick="startTapGame()" style="margin:auto;">Start ▶</button>
+        </div>
+
+        <button class="btn" onclick="nextPage()">Continue ➜</button>
+    </div>
+</section>
+
+<!-- =====================================================
+     PAGE 4 — MEMORIES (CAROUSEL)
 ===================================================== -->
 <section class="page" id="page4">
     <div class="card">
@@ -1039,14 +1332,59 @@ input[type=range].love-slider::-moz-range-thumb {
         <h1>Memories</h1>
         <p>Some moments are too beautiful to simply be forgotten. ❤️</p>
 
-        <div class="memories">
-            <div class="memory"><img src="memory1.jpg" alt="Memory 1"></div>
-            <div class="memory"><img src="memory2.jpg" alt="Memory 2"></div>
-            <div class="memory"><img src="memory3.jpg" alt="Memory 3"></div>
-            <div class="memory"><img src="memory4.jpg" alt="Memory 4"></div>
+        <div class="carousel-wrap" id="carouselWrap">
+            <div class="carousel-track" id="carouselTrack">
+                <img src="memory1.jpg" alt="Memory 1">
+                <img src="memory2.jpg" alt="Memory 2">
+                <img src="memory3.jpg" alt="Memory 3">
+                <img src="memory4.jpg" alt="Memory 4">
+            </div>
+            <div class="carousel-arrow left" onclick="carouselMove(-1)">‹</div>
+            <div class="carousel-arrow right" onclick="carouselMove(1)">›</div>
         </div>
+        <div class="carousel-dots" id="carouselDots"></div>
 
-        <button class="btn" onclick="nextPage()">One Last Surprise 🎁</button>
+        <button class="btn" onclick="nextPage()">Next Surprise 🎁</button>
+    </div>
+</section>
+
+<!-- =====================================================
+     NEW PAGE — PUZZLE REVEAL
+===================================================== -->
+<section class="page" id="puzzlePage">
+    <div class="card">
+        <div class="icon">🧩</div>
+        <div class="kicker">Piece It Together</div>
+        <h1>Puzzle Time</h1>
+        <p>Tap two pieces to swap them and rebuild the photo.</p>
+
+        <div class="puzzle-grid" id="puzzleGrid"></div>
+        <div id="puzzleWinMsg" style="display:none; margin-bottom:6px;">🎉 Solved it! Perfect.</div>
+
+        <button class="btn" onclick="nextPage()">Continue ➜</button>
+    </div>
+</section>
+
+<!-- =====================================================
+     NEW PAGE — ZODIAC / FUN FACTS
+===================================================== -->
+<section class="page" id="zodiacPage">
+    <div class="card">
+        <div class="icon">🌟</div>
+        <div class="kicker">Just For Fun</div>
+        <h1>All About You</h1>
+
+        <div class="zodiac-symbol">♈</div>
+        <p style="opacity:.85;">Edit this section with her actual zodiac sign & fun facts!</p>
+
+        <ul class="fact-list">
+            <li>Zodiac sign: <b>[Add sign here]</b></li>
+            <li>Birthstone: <b>[Add birthstone]</b></li>
+            <li>Fun fact about her birth month: <b>[Add fact]</b></li>
+            <li>Something special that happened on this day: <b>[Add fact]</b></li>
+        </ul>
+
+        <button class="btn" onclick="nextPage()">Continue ➜</button>
     </div>
 </section>
 
@@ -1068,7 +1406,30 @@ input[type=range].love-slider::-moz-range-thumb {
         </div>
         <div class="scratch-hint">Scratch to reveal ✨</div>
 
-        <button class="btn" onclick="nextPage()">Final Surprise 🎉</button>
+        <button class="btn" onclick="nextPage()">Continue ➜</button>
+    </div>
+</section>
+
+<!-- =====================================================
+     NEW PAGE — CANDLE BLOW
+===================================================== -->
+<section class="page" id="candlePage">
+    <div class="card">
+        <div class="icon">🎂</div>
+        <div class="kicker">Make A Wish</div>
+        <h1>Blow The Candle</h1>
+        <p>Blow into your mic. 🕯️</p>
+
+        <div class="cake-wrap">
+            <div class="candle-flame" id="candleFlame"></div>
+            <div class="candle-stick"></div>
+            <div class="cake-body"></div>
+        </div>
+
+        <div class="blow-meter-track"><div class="blow-meter-fill" id="blowMeterFill"></div></div>
+        <div class="blow-hint" id="blowHint"></div>
+
+        <button class="btn" onclick="nextPage()" style="margin-top:10px;">Final Surprise 🎉</button>
     </div>
 </section>
 
@@ -1105,7 +1466,11 @@ input[type=range].love-slider::-moz-range-thumb {
 /* ================= PAGE VARIABLES ================= */
 
 let currentPage = 1;
-const pageSequence = ["introPage", "page1", "page2", "reasonsPage", "paperPage", "loveMeterPage", "page4", "scratchPage", "page5"];
+const pageSequence = [
+    "introPage", "page1", "page2", "reasonsPage", "quizPage", "paperPage",
+    "matchGamePage", "tapHeartsPage", "page4", "puzzlePage",
+    "zodiacPage", "scratchPage", "candlePage", "page5"
+];
 
 /* ================= PROGRESS DOTS (dynamic) ================= */
 
@@ -1160,6 +1525,13 @@ function nextPage() {
     const oldPage = document.getElementById(pageSequence[currentPage]);
     if (!oldPage) return;
 
+    // Request mic permission from the user's click on the page BEFORE the candle.
+    // Browsers cannot grant microphone permission silently.
+    const upcomingPageId = pageSequence[currentPage + 1];
+    if (upcomingPageId === "candlePage" && typeof enableMic === "function") {
+        enableMic();
+    }
+
     oldPage.classList.remove("active");
     currentPage++;
 
@@ -1182,6 +1554,23 @@ function nextPage() {
         setTimeout(initScratchCard, 150);
     }
 
+    if (pageId === "quizPage") {
+        renderQuizQuestion();
+    }
+
+    if (pageId === "matchGamePage") {
+        setTimeout(initMatchGame, 100);
+    }
+
+    if (pageId === "page4") {
+        setTimeout(initCarousel, 100);
+    }
+
+    if (pageId === "puzzlePage") {
+        setTimeout(initPuzzle, 150);
+    }
+
+    vibrate(15);
     updateDots();
     createHearts();
     sparkleBurst();
@@ -1192,39 +1581,14 @@ function nextPage() {
     }
 }
 
-/* ================= SWIPE + KEYBOARD NAVIGATION ================= */
-
+/* ================= INPUT NAVIGATION LOCK ================= */
+/* Page changes happen ONLY through the visible on-page buttons.
+   Keyboard keys and swipe gestures cannot advance the surprise. */
 document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight" || e.key === "Enter") nextPage();
-});
-
-let touchStartX = 0;
-document.addEventListener("touchstart", (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-}, { passive: true });
-
-document.addEventListener("touchend", (e) => {
-    const touchEndX = e.changedTouches[0].screenX;
-    if (touchStartX - touchEndX > 60 && currentPage > 0) nextPage();
-}, { passive: true });
-
-/* ================= MUSIC TOGGLE ================= */
-
-function toggleMusic() {
-    const music = document.getElementById("birthdayMusic");
-    const btn = document.getElementById("musicToggle");
-    if (!music) return;
-
-    if (music.paused) {
-        music.play().catch(() => {});
-        btn.textContent = "🔊";
-        btn.classList.add("playing");
-    } else {
-        music.pause();
-        btn.textContent = "🔇";
-        btn.classList.remove("playing");
+    if (["Enter", " ", "ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown"].includes(e.key)) {
+        e.preventDefault();
     }
-}
+});
 
 /* ================= CURSOR TRAIL ================= */
 
@@ -1635,6 +1999,507 @@ function celebrate() {
     fireworks();
     createHearts();
     sparkleBurst();
+}
+
+/* ================= VIBRATION HELPER ================= */
+
+function vibrate(ms) {
+    if (navigator.vibrate) navigator.vibrate(ms);
+}
+
+/* =====================================================
+   QUIZ GAME
+===================================================== */
+
+const quizQuestions = [
+    {
+        q: "Monika ka favorite color kya hai?",
+        options: ["[Option A]", "[Option B]", "[Option C]", "[Option D]"],
+        correct: 0
+    },
+    {
+        q: "Monika ki favorite movie/show kaunsi hai?",
+        options: ["[Option A]", "[Option B]", "[Option C]", "[Option D]"],
+        correct: 1
+    },
+    {
+        q: "Monika ka favorite food kya hai?",
+        options: ["[Option A]", "[Option B]", "[Option C]", "[Option D]"],
+        correct: 2
+    },
+    {
+        q: "Hum pehli baar kab mile the?",
+        options: ["[Option A]", "[Option B]", "[Option C]", "[Option D]"],
+        correct: 0
+    },
+    {
+        q: "Monika ka dream destination kya hai?",
+        options: ["[Option A]", "[Option B]", "[Option C]", "[Option D]"],
+        correct: 3
+    }
+];
+
+let quizIndex = 0;
+let quizScore = 0;
+
+function renderQuizQuestion() {
+    quizIndex = 0;
+    quizScore = 0;
+    document.getElementById("quizContainer").style.display = "block";
+    document.getElementById("quizResult").style.display = "none";
+    showQuizQuestion();
+}
+
+function showQuizQuestion() {
+    const q = quizQuestions[quizIndex];
+    document.getElementById("quizProgress").textContent = `Question ${quizIndex + 1} / ${quizQuestions.length}`;
+    document.getElementById("quizQuestionText").textContent = q.q;
+
+    const optionsEl = document.getElementById("quizOptions");
+    optionsEl.innerHTML = "";
+
+    q.options.forEach((opt, i) => {
+        const div = document.createElement("div");
+        div.className = "quiz-option";
+        div.textContent = opt;
+        div.onclick = () => selectQuizAnswer(i);
+        optionsEl.appendChild(div);
+    });
+}
+
+function selectQuizAnswer(i) {
+    const q = quizQuestions[quizIndex];
+    const opts = document.querySelectorAll("#quizOptions .quiz-option");
+    opts.forEach(o => o.classList.add("disabled"));
+
+    if (i === q.correct) {
+        opts[i].classList.add("correct");
+        quizScore++;
+        vibrate(20);
+    } else {
+        opts[i].classList.add("wrong");
+        opts[q.correct].classList.add("correct");
+        vibrate([15, 40, 15]);
+    }
+
+    setTimeout(() => {
+        quizIndex++;
+        if (quizIndex < quizQuestions.length) {
+            showQuizQuestion();
+        } else {
+            showQuizResult();
+        }
+    }, 900);
+}
+
+function showQuizResult() {
+    document.getElementById("quizContainer").style.display = "none";
+    document.getElementById("quizResult").style.display = "block";
+    document.getElementById("quizScoreBadge").textContent = `${quizScore}/${quizQuestions.length}`;
+
+    let msg = "";
+    const pct = quizScore / quizQuestions.length;
+    if (pct === 1) msg = "Perfect score! You truly know her. 💯💗";
+    else if (pct >= 0.6) msg = "Not bad! Pretty good understanding. 😄";
+    else msg = "Hehe, thoda aur time saath bitao! 😜";
+
+    document.getElementById("quizScoreMsg").textContent = msg;
+    sparkleBurst();
+}
+
+function restartQuiz() {
+    renderQuizQuestion();
+}
+
+/* =====================================================
+   MEMORY MATCH GAME
+===================================================== */
+
+const matchEmojis = ["💖", "🎂", "🌸", "✨", "🎁", "💫", "🥰", "🌟"];
+let matchState = { first: null, second: null, moves: 0, pairs: 0, lock: false };
+
+function initMatchGame() {
+    matchState = { first: null, second: null, moves: 0, pairs: 0, lock: false };
+    document.getElementById("matchMoves").textContent = "0";
+    document.getElementById("matchPairs").textContent = "0";
+    document.getElementById("matchWinMsg").style.display = "none";
+
+    let deck = [...matchEmojis, ...matchEmojis];
+    deck = deck.sort(() => Math.random() - 0.5);
+
+    const grid = document.getElementById("matchGrid");
+    grid.innerHTML = "";
+
+    deck.forEach((emoji, idx) => {
+        const card = document.createElement("div");
+        card.className = "match-card";
+        card.dataset.emoji = emoji;
+        card.dataset.idx = idx;
+        card.innerHTML = `
+            <div class="match-card-inner">
+                <div class="match-card-front">❓</div>
+                <div class="match-card-back">${emoji}</div>
+            </div>`;
+        card.addEventListener("click", () => flipMatchCard(card));
+        grid.appendChild(card);
+    });
+}
+
+function flipMatchCard(card) {
+    if (matchState.lock) return;
+    if (card.classList.contains("flipped") || card.classList.contains("matched")) return;
+
+    card.classList.add("flipped");
+    vibrate(10);
+
+    if (!matchState.first) {
+        matchState.first = card;
+        return;
+    }
+
+    matchState.second = card;
+    matchState.lock = true;
+    matchState.moves++;
+    document.getElementById("matchMoves").textContent = matchState.moves;
+
+    const isMatch = matchState.first.dataset.emoji === matchState.second.dataset.emoji;
+
+    setTimeout(() => {
+        if (isMatch) {
+            matchState.first.classList.add("matched");
+            matchState.second.classList.add("matched");
+            matchState.pairs++;
+            document.getElementById("matchPairs").textContent = matchState.pairs;
+            sparkleBurst();
+
+            if (matchState.pairs === matchEmojis.length) {
+                document.getElementById("matchWinMsg").style.display = "block";
+                celebrate();
+            }
+        } else {
+            matchState.first.classList.remove("flipped");
+            matchState.second.classList.remove("flipped");
+        }
+        matchState.first = null;
+        matchState.second = null;
+        matchState.lock = false;
+    }, isMatch ? 350 : 700);
+}
+
+/* =====================================================
+   TAP THE HEARTS GAME
+===================================================== */
+
+let tapGameActive = false;
+let tapGameScore = 0;
+let tapGameTimer = null;
+let tapSpawnTimer = null;
+
+function startTapGame() {
+    if (tapGameActive) return;
+    tapGameActive = true;
+    tapGameScore = 0;
+
+    const arena = document.getElementById("tapArena");
+    arena.innerHTML = "";
+    document.getElementById("tapScore").textContent = "0";
+
+    let timeLeft = 15;
+    document.getElementById("tapTime").textContent = timeLeft;
+
+    tapGameTimer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("tapTime").textContent = timeLeft;
+        if (timeLeft <= 0) stopTapGame();
+    }, 1000);
+
+    tapSpawnTimer = setInterval(spawnTapHeart, 650);
+    spawnTapHeart();
+}
+
+function spawnTapHeart() {
+    const arena = document.getElementById("tapArena");
+    if (!arena || !tapGameActive) return;
+
+    const heart = document.createElement("div");
+    heart.className = "tap-heart";
+    heart.textContent = ["💖", "💕", "💗", "❤️"][Math.floor(Math.random() * 4)];
+
+    const maxX = arena.clientWidth - 30;
+    const maxY = arena.clientHeight - 30;
+    heart.style.left = Math.max(0, Math.random() * maxX) + "px";
+    heart.style.top = Math.max(0, Math.random() * maxY) + "px";
+
+    heart.addEventListener("click", () => {
+        tapGameScore++;
+        document.getElementById("tapScore").textContent = tapGameScore;
+        vibrate(15);
+        heart.remove();
+    });
+
+    arena.appendChild(heart);
+    setTimeout(() => heart.remove(), 1400);
+}
+
+function stopTapGame() {
+    tapGameActive = false;
+    clearInterval(tapGameTimer);
+    clearInterval(tapSpawnTimer);
+
+    const arena = document.getElementById("tapArena");
+    arena.innerHTML = `<div style="margin:auto; text-align:center;">
+        <div style="font-size:1.4rem; font-weight:600;">Score: ${tapGameScore} 💘</div>
+        <button class="btn" onclick="startTapGame()" style="margin-top:10px;">Play Again 🔁</button>
+    </div>`;
+    celebrate();
+}
+
+/* =====================================================
+   PHOTO CAROUSEL
+===================================================== */
+
+let carouselIndex = 0;
+
+function initCarousel() {
+    const track = document.getElementById("carouselTrack");
+    const dotsWrap = document.getElementById("carouselDots");
+    const imgs = track.querySelectorAll("img");
+
+    dotsWrap.innerHTML = "";
+    imgs.forEach((_, i) => {
+        const dot = document.createElement("span");
+        if (i === 0) dot.classList.add("active");
+        dotsWrap.appendChild(dot);
+    });
+
+    carouselIndex = 0;
+    updateCarousel();
+
+    imgs.forEach(img => {
+        img.onclick = () => openLightbox(img.src);
+    });
+
+    clearInterval(window.carouselAutoTimer);
+    window.carouselAutoTimer = setInterval(() => carouselMove(1), 3500);
+}
+
+function updateCarousel() {
+    const track = document.getElementById("carouselTrack");
+    const imgs = track.querySelectorAll("img");
+    track.style.transform = `translateX(-${carouselIndex * 100}%)`;
+
+    document.querySelectorAll("#carouselDots span").forEach((d, i) => {
+        d.classList.toggle("active", i === carouselIndex);
+    });
+}
+
+function carouselMove(dir) {
+    const track = document.getElementById("carouselTrack");
+    const imgs = track.querySelectorAll("img");
+    carouselIndex = (carouselIndex + dir + imgs.length) % imgs.length;
+    updateCarousel();
+}
+
+/* =====================================================
+   PUZZLE REVEAL
+===================================================== */
+
+let puzzleSelected = null;
+let puzzleOrder = [];
+const PUZZLE_SIZE = 3;
+
+function initPuzzle() {
+    const grid = document.getElementById("puzzleGrid");
+    grid.innerHTML = "";
+    document.getElementById("puzzleWinMsg").style.display = "none";
+    puzzleSelected = null;
+
+    const total = PUZZLE_SIZE * PUZZLE_SIZE;
+    puzzleOrder = [...Array(total).keys()];
+    do {
+        puzzleOrder = puzzleOrder.sort(() => Math.random() - 0.5);
+    } while (puzzleOrder.every((v, i) => v === i));
+
+    puzzleOrder.forEach((pieceIdx, slotIdx) => {
+        const piece = document.createElement("div");
+        piece.className = "puzzle-piece";
+        piece.dataset.slot = slotIdx;
+        piece.dataset.piece = pieceIdx;
+        applyPuzzlePieceStyle(piece, pieceIdx);
+        piece.addEventListener("click", () => selectPuzzlePiece(piece));
+        grid.appendChild(piece);
+    });
+}
+
+function applyPuzzlePieceStyle(piece, pieceIdx) {
+    const row = Math.floor(pieceIdx / PUZZLE_SIZE);
+    const col = pieceIdx % PUZZLE_SIZE;
+    piece.style.backgroundImage = "url('monika-dp.jpg')";
+    piece.style.backgroundPosition = `${(col * 100) / (PUZZLE_SIZE - 1)}% ${(row * 100) / (PUZZLE_SIZE - 1)}%`;
+}
+
+function selectPuzzlePiece(piece) {
+    vibrate(10);
+    if (!puzzleSelected) {
+        puzzleSelected = piece;
+        piece.classList.add("selected");
+        return;
+    }
+
+    if (puzzleSelected === piece) {
+        piece.classList.remove("selected");
+        puzzleSelected = null;
+        return;
+    }
+
+    const pieceA = puzzleSelected.dataset.piece;
+    const pieceB = piece.dataset.piece;
+    applyPuzzlePieceStyle(puzzleSelected, pieceB);
+    applyPuzzlePieceStyle(piece, pieceA);
+    puzzleSelected.dataset.piece = pieceB;
+    piece.dataset.piece = pieceA;
+
+    puzzleSelected.classList.remove("selected");
+    puzzleSelected = null;
+
+    checkPuzzleSolved();
+}
+
+function checkPuzzleSolved() {
+    const pieces = document.querySelectorAll("#puzzleGrid .puzzle-piece");
+    const solved = [...pieces].every(p => Number(p.dataset.piece) === Number(p.dataset.slot));
+    if (solved) {
+        document.getElementById("puzzleWinMsg").style.display = "block";
+        celebrate();
+    }
+}
+
+/* =====================================================
+   CANDLE BLOW
+===================================================== */
+
+let micStream = null;
+
+function enableMic() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        document.getElementById("blowHint").textContent = "Microphone is not supported on this device.";
+        return;
+    }
+
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+        micStream = stream;
+        const micBtn = document.getElementById("micBtn");
+        if (micBtn) micBtn.style.display = "none";
+        document.getElementById("blowHint").textContent = "Blow into your mic. 💨";
+
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const analyser = audioCtx.createAnalyser();
+        const source = audioCtx.createMediaStreamSource(stream);
+        source.connect(analyser);
+        analyser.fftSize = 512;
+        const data = new Uint8Array(analyser.frequencyBinCount);
+
+        function checkVolume() {
+            if (document.getElementById("candleFlame").classList.contains("out")) return;
+            analyser.getByteFrequencyData(data);
+            const avg = data.reduce((a, b) => a + b, 0) / data.length;
+            document.getElementById("blowMeterFill").style.width = Math.min(100, avg * 2) + "%";
+
+            if (avg > 35) {
+                blowOutCandle();
+                stream.getTracks().forEach(t => t.stop());
+                return;
+            }
+            requestAnimationFrame(checkVolume);
+        }
+        checkVolume();
+    }).catch(() => {
+        document.getElementById("blowHint").textContent = "Microphone access was denied.";
+    });
+}
+
+function blowOutCandle() {
+    document.getElementById("candleFlame").classList.add("out");
+    document.getElementById("blowHint").textContent = "Wish made! 🌟 Happy Birthday Monika!";
+    vibrate([20, 30, 20]);
+    celebrate();
+}
+
+
+
+/* =====================================================
+   FALLING PETALS (background canvas)
+===================================================== */
+
+const petalsCanvas = document.getElementById("petalsCanvas");
+const petalsCtx = petalsCanvas.getContext("2d");
+let petals = [];
+
+function resizePetalsCanvas() {
+    petalsCanvas.width = window.innerWidth;
+    petalsCanvas.height = window.innerHeight;
+}
+resizePetalsCanvas();
+window.addEventListener("resize", resizePetalsCanvas);
+
+function createPetal() {
+    return {
+        x: Math.random() * petalsCanvas.width,
+        y: -20,
+        size: 8 + Math.random() * 10,
+        speedY: 0.6 + Math.random() * 1.2,
+        speedX: Math.random() * 1 - 0.5,
+        rotation: Math.random() * 360,
+        rotationSpeed: Math.random() * 2 - 1,
+        emoji: Math.random() > 0.5 ? "🌸" : "💮"
+    };
+}
+
+for (let i = 0; i < 12; i++) {
+    const p = createPetal();
+    p.y = Math.random() * petalsCanvas.height;
+    petals.push(p);
+}
+
+function animatePetals() {
+    petalsCtx.clearRect(0, 0, petalsCanvas.width, petalsCanvas.height);
+
+    petals.forEach(p => {
+        p.y += p.speedY;
+        p.x += p.speedX + Math.sin(p.y / 50) * 0.4;
+        p.rotation += p.rotationSpeed;
+
+        if (p.y > petalsCanvas.height + 20) {
+            Object.assign(p, createPetal());
+        }
+
+        petalsCtx.save();
+        petalsCtx.translate(p.x, p.y);
+        petalsCtx.rotate((p.rotation * Math.PI) / 180);
+        petalsCtx.font = `${p.size}px serif`;
+        petalsCtx.globalAlpha = 0.75;
+        petalsCtx.fillText(p.emoji, -p.size / 2, p.size / 2);
+        petalsCtx.restore();
+    });
+
+    requestAnimationFrame(animatePetals);
+}
+animatePetals();
+
+/* =====================================================
+   FAUX-PARALLAX (background blobs follow mouse gently)
+===================================================== */
+
+if (window.matchMedia("(pointer: fine)").matches) {
+    const blobs = document.querySelectorAll(".blob");
+    document.addEventListener("mousemove", (e) => {
+        const xRatio = (e.clientX / window.innerWidth - 0.5);
+        const yRatio = (e.clientY / window.innerHeight - 0.5);
+        blobs.forEach((blob, i) => {
+            const depth = (i + 1) * 12;
+            blob.style.transform = `translate(${xRatio * depth}px, ${yRatio * depth}px)`;
+        });
+    });
 }
 
 </script>
