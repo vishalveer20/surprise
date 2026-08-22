@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>For You, Princess ❤️</title>
 
 <style>
@@ -83,11 +83,15 @@ audio { display: none; }
     width: 100%;
     height: 100dvh;
     padding: 15px;
+    padding-top: calc(15px + env(safe-area-inset-top));
+    padding-bottom: calc(46px + env(safe-area-inset-bottom));
     display: flex;
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     opacity: 0;
     visibility: hidden;
     transform: translateX(35px);
@@ -346,11 +350,14 @@ p {
 .progress {
     position: fixed;
     left: 50%;
-    bottom: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
     transform: translateX(-50%);
     display: flex;
     gap: 7px;
     z-index: 30;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 92vw;
 }
 
 .dot {
@@ -380,6 +387,18 @@ p {
 #page4 .memories { width: 100%; max-width: 570px; margin: 12px auto 10px; gap: 8px; }
 #page4 .memory { width: 100%; aspect-ratio: 4 / 3; height: auto; border-radius: 14px; }
 #page4 .btn { display: block; position: relative; z-index: 100; visibility: visible; opacity: 1; margin: 8px auto 4px; padding: 11px 28px; }
+
+/* =====================================================
+   TAP THE BOMBS PAGE FIX
+===================================================== */
+
+#tapHeartsPage .card { padding: 24px 24px; }
+#tapHeartsPage .icon { width: 60px; height: 60px; font-size: 30px; margin-bottom: 8px; }
+#tapHeartsPage .kicker { margin-bottom: 5px; }
+#tapHeartsPage h1 { font-size: clamp(2.4rem, 7vw, 4rem); margin-bottom: 7px; }
+#tapHeartsPage p { font-size: .82rem; line-height: 1.35; margin-bottom: 4px; }
+#tapHeartsPage .tap-arena { height: 210px; margin: 8px 0 12px; }
+#tapHeartsPage .btn { margin-top: 12px; }
 
 /* =====================================================
    DRAG PAPER MEMORY PAGE
@@ -467,8 +486,16 @@ p {
 
 @media (max-width: 600px) {
 
-    .page { height: 100dvh; min-height: 100dvh; padding: 8px; overflow-x: hidden; overflow-y: auto; }
-    .card { width: 100%; max-height: calc(100dvh - 16px); padding: 24px 17px; border-radius: 25px; }
+    .page {
+        height: 100dvh;
+        min-height: 100dvh;
+        padding: 8px;
+        padding-top: calc(8px + env(safe-area-inset-top));
+        padding-bottom: calc(38px + env(safe-area-inset-bottom));
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .card { width: 100%; max-height: calc(100dvh - 54px - env(safe-area-inset-bottom)); padding: 24px 17px; border-radius: 25px; }
     .icon { width: 68px; height: 68px; font-size: 32px; margin-bottom: 13px; }
     .birthday-dp { width: 92px; height: 92px; margin-bottom: 13px; }
     h1 { font-size: clamp(2.6rem, 14vw, 4rem); margin-bottom: 12px; }
@@ -478,7 +505,17 @@ p {
     .memories { grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 15px 0; }
     .memory { aspect-ratio: 4 / 3; border-radius: 14px; }
     .kicker { font-size: .62rem; letter-spacing: 3px; margin-bottom: 9px; }
-    .progress { bottom: 7px; }
+    .progress { bottom: calc(10px + env(safe-area-inset-bottom)); }
+
+    /* MOBILE TAP THE BOMBS FIX */
+    #tapHeartsPage .card { padding: 18px 15px; max-height: none; }
+    #tapHeartsPage .icon { width: 50px; height: 50px; font-size: 24px; margin-bottom: 6px; }
+    #tapHeartsPage .kicker { font-size: .6rem; margin-bottom: 4px; }
+    #tapHeartsPage h1 { font-size: 2.4rem; margin-bottom: 5px; }
+    #tapHeartsPage p { font-size: .78rem; line-height: 1.3; margin-bottom: 2px; }
+    #tapHeartsPage .tap-hud { margin-bottom: 4px; }
+    #tapHeartsPage .tap-arena { height: 175px; margin: 6px 0 10px; }
+    #tapHeartsPage .btn { width: 100%; margin-top: 8px; padding: 11px 20px; }
 
     /* MOBILE MEMORIES FIX */
     #page4 .card { padding: 17px 14px; max-height: none; padding-bottom: 12px; }
@@ -508,6 +545,13 @@ p {
     #page4 h1 { font-size: 2.5rem; }
     #page4 .memories { margin: 7px auto; }
     #page4 .btn { padding: 9px 16px; margin-top: 4px; }
+
+    #tapHeartsPage .card { padding: 14px 13px; }
+    #tapHeartsPage .icon { width: 42px; height: 42px; font-size: 20px; margin-bottom: 4px; }
+    #tapHeartsPage h1 { font-size: 2rem; margin-bottom: 4px; }
+    #tapHeartsPage p { font-size: .72rem; }
+    #tapHeartsPage .tap-arena { height: 145px; margin: 5px 0 8px; }
+    #tapHeartsPage .btn { padding: 9px 16px; margin-top: 6px; }
 }
 
 /* =====================================================
@@ -957,20 +1001,7 @@ p {
 }
 
 .blow-hint { font-size: .8rem; opacity: .75; margin-top: 12px; min-height: 1.3em; }
-.blow-meter-track {
-    width: 100%;
-    height: 8px;
-    border-radius: 10px;
-    background: rgba(255,255,255,.15);
-    overflow: hidden;
-    margin-top: 10px;
-}
-.blow-meter-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #ff9d3d, #ff4f9a);
-    transition: width .1s ease;
-}
+.cake-wrap { touch-action: manipulation; }
 
 /* =====================================================
    NEW: PHOTO CAROUSEL (replaces static memory grid)
@@ -984,6 +1015,7 @@ p {
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 15px 40px rgba(0,0,0,.4);
+    touch-action: pan-y;
 }
 
 .carousel-track {
@@ -1304,10 +1336,10 @@ p {
 ===================================================== -->
 <section class="page" id="tapHeartsPage">
     <div class="card">
-        <div class="icon">💘</div>
+        <div class="icon">💣</div>
         <div class="kicker">Quick Game</div>
-        <h1>Tap The Hearts</h1>
-        <p>Tap as many hearts as you can in 15 seconds!</p>
+        <h1>Tap The Bombs</h1>
+        <p>Tap as many bombs as you can in 15 seconds!</p>
 
         <div class="tap-hud">
             <span>Score: <b id="tapScore">0</b></span>
@@ -1418,15 +1450,14 @@ p {
         <div class="icon">🎂</div>
         <div class="kicker">Make A Wish</div>
         <h1>Blow The Candle</h1>
-        <p>Blow into your mic. 🕯️</p>
+        <p>Tap the candle to blow it out. 🕯️</p>
 
-        <div class="cake-wrap">
+        <div class="cake-wrap" id="cakeWrap" onclick="blowOutCandle()" style="cursor:pointer;">
             <div class="candle-flame" id="candleFlame"></div>
             <div class="candle-stick"></div>
             <div class="cake-body"></div>
         </div>
 
-        <div class="blow-meter-track"><div class="blow-meter-fill" id="blowMeterFill"></div></div>
         <div class="blow-hint" id="blowHint"></div>
 
         <button class="btn" onclick="nextPage()" style="margin-top:10px;">Final Surprise 🎉</button>
@@ -1525,11 +1556,8 @@ function nextPage() {
     const oldPage = document.getElementById(pageSequence[currentPage]);
     if (!oldPage) return;
 
-    // Request mic permission from the user's click on the page BEFORE the candle.
-    // Browsers cannot grant microphone permission silently.
-    const upcomingPageId = pageSequence[currentPage + 1];
-    if (upcomingPageId === "candlePage" && typeof enableMic === "function") {
-        enableMic();
+    if (pageSequence[currentPage] === "page4" && typeof stopCarouselAutoplay === "function") {
+        stopCarouselAutoplay();
     }
 
     oldPage.classList.remove("active");
@@ -2223,7 +2251,7 @@ function spawnTapHeart() {
 
     const heart = document.createElement("div");
     heart.className = "tap-heart";
-    heart.textContent = ["💖", "💕", "💗", "❤️"][Math.floor(Math.random() * 4)];
+    heart.textContent = ["💣", "🧨", "💥", "💣"][Math.floor(Math.random() * 4)];
 
     const maxX = arena.clientWidth - 30;
     const maxY = arena.clientHeight - 30;
@@ -2248,7 +2276,7 @@ function stopTapGame() {
 
     const arena = document.getElementById("tapArena");
     arena.innerHTML = `<div style="margin:auto; text-align:center;">
-        <div style="font-size:1.4rem; font-weight:600;">Score: ${tapGameScore} 💘</div>
+        <div style="font-size:1.4rem; font-weight:600;">Score: ${tapGameScore} 💣</div>
         <button class="btn" onclick="startTapGame()" style="margin-top:10px;">Play Again 🔁</button>
     </div>`;
     celebrate();
@@ -2263,7 +2291,9 @@ let carouselIndex = 0;
 function initCarousel() {
     const track = document.getElementById("carouselTrack");
     const dotsWrap = document.getElementById("carouselDots");
+    if (!track || !dotsWrap) return;
     const imgs = track.querySelectorAll("img");
+    if (!imgs.length) return;
 
     dotsWrap.innerHTML = "";
     imgs.forEach((_, i) => {
@@ -2283,9 +2313,13 @@ function initCarousel() {
     window.carouselAutoTimer = setInterval(() => carouselMove(1), 3500);
 }
 
+function stopCarouselAutoplay() {
+    clearInterval(window.carouselAutoTimer);
+}
+
 function updateCarousel() {
     const track = document.getElementById("carouselTrack");
-    const imgs = track.querySelectorAll("img");
+    if (!track) return;
     track.style.transform = `translateX(-${carouselIndex * 100}%)`;
 
     document.querySelectorAll("#carouselDots span").forEach((d, i) => {
@@ -2295,7 +2329,9 @@ function updateCarousel() {
 
 function carouselMove(dir) {
     const track = document.getElementById("carouselTrack");
+    if (!track) return;
     const imgs = track.querySelectorAll("img");
+    if (!imgs.length) return;
     carouselIndex = (carouselIndex + dir + imgs.length) % imgs.length;
     updateCarousel();
 }
@@ -2378,48 +2414,10 @@ function checkPuzzleSolved() {
    CANDLE BLOW
 ===================================================== */
 
-let micStream = null;
-
-function enableMic() {
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        document.getElementById("blowHint").textContent = "Microphone is not supported on this device.";
-        return;
-    }
-
-    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-        micStream = stream;
-        const micBtn = document.getElementById("micBtn");
-        if (micBtn) micBtn.style.display = "none";
-        document.getElementById("blowHint").textContent = "Blow into your mic. 💨";
-
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const analyser = audioCtx.createAnalyser();
-        const source = audioCtx.createMediaStreamSource(stream);
-        source.connect(analyser);
-        analyser.fftSize = 512;
-        const data = new Uint8Array(analyser.frequencyBinCount);
-
-        function checkVolume() {
-            if (document.getElementById("candleFlame").classList.contains("out")) return;
-            analyser.getByteFrequencyData(data);
-            const avg = data.reduce((a, b) => a + b, 0) / data.length;
-            document.getElementById("blowMeterFill").style.width = Math.min(100, avg * 2) + "%";
-
-            if (avg > 35) {
-                blowOutCandle();
-                stream.getTracks().forEach(t => t.stop());
-                return;
-            }
-            requestAnimationFrame(checkVolume);
-        }
-        checkVolume();
-    }).catch(() => {
-        document.getElementById("blowHint").textContent = "Microphone access was denied.";
-    });
-}
-
 function blowOutCandle() {
-    document.getElementById("candleFlame").classList.add("out");
+    const flame = document.getElementById("candleFlame");
+    if (flame.classList.contains("out")) return;
+    flame.classList.add("out");
     document.getElementById("blowHint").textContent = "Wish made! 🌟 Happy Birthday Monika!";
     vibrate([20, 30, 20]);
     celebrate();
