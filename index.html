@@ -10,7 +10,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html, body { width: 100%; min-height: 100%; overflow-x: hidden; overflow-y: auto; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -81,16 +81,12 @@ audio { display: none; }
     position: fixed;
     inset: 0;
     width: 100%;
-    min-height: 100dvh;
-    height: auto;
-    padding: 15px 15px 90px;
+    height: 100dvh;
+    padding: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
+    overflow: hidden;
     opacity: 0;
     visibility: hidden;
     transform: translateX(35px);
@@ -109,8 +105,8 @@ audio { display: none; }
 .card {
     position: relative;
     width: min(720px, 100%);
-    max-height: none;
-    overflow: visible;
+    max-height: calc(100dvh - 30px);
+    overflow: hidden;
     padding: 35px 30px;
     text-align: center;
     border: 1px solid rgba(255,255,255,.18);
@@ -349,11 +345,11 @@ p {
 .progress {
     position: fixed;
     left: 50%;
-    bottom: max(12px, env(safe-area-inset-bottom));
+    bottom: 14px;
     transform: translateX(-50%);
     display: flex;
     gap: 7px;
-    z-index: 1000;
+    z-index: 30;
 }
 
 .dot {
@@ -471,9 +467,8 @@ p {
 
 @media (max-width: 600px) {
 
-    .page { min-height: 100dvh; height: auto; padding: 12px 8px 90px; overflow-x: hidden; overflow-y: auto; align-items: flex-start; justify-content: flex-start; -webkit-overflow-scrolling: touch; }
-    .page.active { overflow-x: hidden; overflow-y: auto; }
-    .card { width: 100%; max-height: none; overflow: visible; padding: 24px 17px; border-radius: 25px; margin: 0 auto 10px; }
+    .page { height: 100dvh; min-height: 100dvh; padding: 8px; overflow: hidden; }
+    .card { width: 100%; max-height: calc(100dvh - 16px); padding: 24px 17px; border-radius: 25px; }
     .icon { width: 68px; height: 68px; font-size: 32px; margin-bottom: 13px; }
     .birthday-dp { width: 92px; height: 92px; margin-bottom: 13px; }
     h1 { font-size: clamp(2.6rem, 14vw, 4rem); margin-bottom: 12px; }
@@ -486,7 +481,7 @@ p {
     .progress { bottom: 7px; }
 
     /* MOBILE MEMORIES FIX */
-    #page4 .card { padding: 17px 14px 18px; max-height: none; overflow: visible; padding-bottom: 18px; margin-bottom: 10px; }
+    #page4 .card { padding: 17px 14px; max-height: calc(100dvh - 16px); padding-bottom: 12px; }
     #page4 .icon { width: 52px; height: 52px; font-size: 25px; margin-bottom: 6px; }
     #page4 .kicker { font-size: .58rem; margin-bottom: 4px; }
     #page4 h1 { font-size: 2.8rem; margin-bottom: 5px; }
@@ -508,33 +503,13 @@ p {
 ===================================================== */
 
 @media (max-width: 600px) and (max-height: 700px) {
-    #page4 .card { padding: 13px 12px 18px; }
+    #page4 .card { padding: 13px 12px; }
     #page4 .icon { width: 46px; height: 46px; font-size: 22px; }
     #page4 h1 { font-size: 2.5rem; }
     #page4 .memories { margin: 7px auto; }
     #page4 .btn { padding: 9px 16px; margin-top: 4px; }
 }
 
-
-/* ================= MOBILE TAP THE BOMBS FIX ================= */
-@media (max-width: 600px) {
-    #tapHeartsPage .card { padding: 14px 13px 12px; max-height: none; overflow: visible; margin-bottom: 10px; }
-    #tapHeartsPage .icon { width: 48px; height: 48px; font-size: 25px; margin-bottom: 5px; }
-    #tapHeartsPage h1 { font-size: 2.45rem; margin-bottom: 5px; }
-    #tapHeartsPage p { font-size: .72rem; margin-bottom: 5px; }
-    #tapHeartsPage .tap-hud { margin-bottom: 4px; font-size: .78rem; }
-    #tapHeartsPage .tap-arena { height: 150px; margin: 5px 0 7px; }
-    #tapHeartsPage .btn { margin-top: 6px; padding: 10px 16px; }
-}
-
-/* ================= DOTS / SAFE AREA ================= */
-.progress { bottom: max(8px, env(safe-area-inset-bottom)); }
-@media (max-width: 600px) {
-    .page { min-height: 100dvh; height: auto; padding: 12px 8px 90px; overflow-x: hidden; overflow-y: auto; align-items: flex-start; justify-content: flex-start; -webkit-overflow-scrolling: touch; }
-    .page.active { overflow-x: hidden; overflow-y: auto; }
-    .card { max-height: none; overflow: visible; margin-bottom: 10px; }
-    .progress { bottom: max(10px, env(safe-area-inset-bottom)); z-index: 1000; }
-}
 /* =====================================================
    NEW: CURSOR TRAIL (desktop only)
 ===================================================== */
@@ -553,6 +528,38 @@ p {
     transition: opacity .3s ease;
 }
 
+/* =====================================================
+   NEW: MUSIC TOGGLE BUTTON
+===================================================== */
+
+.music-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 300;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.28);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    cursor: pointer;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.music-toggle:hover { transform: scale(1.1); }
+
+.music-toggle.playing {
+    animation: musicPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,111,174,.5); }
     50%      { box-shadow: 0 0 0 9px rgba(255,111,174,0); }
 }
 
@@ -913,7 +920,7 @@ input[type=range].love-slider::-moz-range-thumb {
 .tap-arena {
     position: relative;
     width: 100%;
-    height: 175px;
+    height: 260px;
     border-radius: 18px;
     background: rgba(255,255,255,.05);
     border: 1px solid rgba(255,255,255,.15);
@@ -1046,7 +1053,20 @@ input[type=range].love-slider::-moz-range-thumb {
 }
 
 .blow-hint { font-size: .8rem; opacity: .75; margin-top: 12px; min-height: 1.3em; }
-
+.blow-meter-track {
+    width: 100%;
+    height: 8px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.15);
+    overflow: hidden;
+    margin-top: 10px;
+}
+.blow-meter-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff9d3d, #ff4f9a);
+    transition: width .1s ease;
+}
 
 /* =====================================================
    NEW: PHOTO CAROUSEL (replaces static memory grid)
@@ -1064,14 +1084,13 @@ input[type=range].love-slider::-moz-range-thumb {
 
 .carousel-track {
     display: flex;
-    will-change: transform;
     transition: transform .5s cubic-bezier(.4,.2,.2,1);
 }
 
 .carousel-track img {
     width: 100%;
     flex-shrink: 0;
-    aspect-ratio: 4/3;
+    aspect-ratio: 4/5;
     object-fit: cover;
     cursor: zoom-in;
 }
@@ -1144,6 +1163,9 @@ input[type=range].love-slider::-moz-range-thumb {
 
 <!-- ================= CONFETTI ================= -->
 <canvas id="confetti"></canvas>
+
+<!-- ================= MUSIC TOGGLE ================= -->
+<div class="music-toggle" id="musicToggle" onclick="toggleMusic()">🔇</div>
 
 <!-- ================= CURSOR TRAIL (desktop) ================= -->
 <div class="cursor-dot" id="cursorDot"></div>
@@ -1323,7 +1345,7 @@ input[type=range].love-slider::-moz-range-thumb {
 
             <div class="drag-paper photo-paper" data-stack-paper data-index="3" style="--paper-rot:5deg;z-index:2;">
                 <span class="paper-number">04</span>
-                <img loading="lazy" decoding="async" src="memory2.jpg" alt="Memory">
+                <img src="memory2.jpg" alt="Memory">
                 <p>A memory worth keeping. 📸</p>
             </div>
 
@@ -1336,7 +1358,7 @@ input[type=range].love-slider::-moz-range-thumb {
 
             <div class="drag-paper photo-paper" data-stack-paper data-index="1" style="--paper-rot:7deg;z-index:4;">
                 <span class="paper-number">02</span>
-                <img loading="lazy" decoding="async" src="memory1.jpg" alt="Memory">
+                <img src="memory1.jpg" alt="Memory">
                 <p>A little moment worth keeping. ❤️</p>
             </div>
 
@@ -1351,6 +1373,28 @@ input[type=range].love-slider::-moz-range-thumb {
     </div>
 </section>
 
+<!-- =====================================================
+     NEW PAGE — INTERACTIVE LOVE METER
+===================================================== -->
+<section class="page" id="loveMeterPage">
+    <div class="card">
+        <div class="icon">💗</div>
+        <div class="kicker">Slide To Find Out</div>
+        <h1>Love Meter</h1>
+        <p>Drag the slider and see the magic number. 😉</p>
+
+        <div class="love-meter-wrap">
+            <div class="love-meter-emoji" id="loveEmoji">🙂</div>
+            <input type="range" min="0" max="100" value="0" class="love-slider" id="loveSlider" oninput="updateLoveMeter(this.value)">
+            <div class="love-meter-track">
+                <div class="love-meter-fill" id="loveFill"></div>
+            </div>
+            <div class="love-meter-label" id="loveLabel">Move the slider...</div>
+        </div>
+
+        <button class="btn" onclick="nextPage()">Next ➜</button>
+    </div>
+</section>
 
 <!-- =====================================================
      NEW PAGE — MEMORY MATCH GAME
@@ -1378,10 +1422,10 @@ input[type=range].love-slider::-moz-range-thumb {
 ===================================================== -->
 <section class="page" id="tapHeartsPage">
     <div class="card">
-        <div class="icon">💣</div>
+        <div class="icon">💘</div>
         <div class="kicker">Quick Game</div>
-        <h1>Tap The Bombs</h1>
-        <p>Tap as many bombs as you can in 15 seconds!</p>
+        <h1>Tap The Hearts</h1>
+        <p>Tap as many hearts as you can in 15 seconds!</p>
 
         <div class="tap-hud">
             <span>Score: <b id="tapScore">0</b></span>
@@ -1408,10 +1452,10 @@ input[type=range].love-slider::-moz-range-thumb {
 
         <div class="carousel-wrap" id="carouselWrap">
             <div class="carousel-track" id="carouselTrack">
-                <img loading="lazy" decoding="async" src="memory1.jpg" alt="Memory 1">
-                <img loading="lazy" decoding="async" src="memory2.jpg" alt="Memory 2">
-                <img loading="lazy" decoding="async" src="memory3.jpg" alt="Memory 3">
-                <img loading="lazy" decoding="async" src="memory4.jpg" alt="Memory 4">
+                <img src="memory1.jpg" alt="Memory 1">
+                <img src="memory2.jpg" alt="Memory 2">
+                <img src="memory3.jpg" alt="Memory 3">
+                <img src="memory4.jpg" alt="Memory 4">
             </div>
             <div class="carousel-arrow left" onclick="carouselMove(-1)">‹</div>
             <div class="carousel-arrow right" onclick="carouselMove(1)">›</div>
@@ -1492,7 +1536,7 @@ input[type=range].love-slider::-moz-range-thumb {
         <div class="icon">🎂</div>
         <div class="kicker">Make A Wish</div>
         <h1>Blow The Candle</h1>
-        <p>Tap the candle flame to make a wish. 🕯️</p>
+        <p>Blow into your mic, or just tap the flame. 🕯️</p>
 
         <div class="cake-wrap">
             <div class="candle-flame" id="candleFlame"></div>
@@ -1500,7 +1544,10 @@ input[type=range].love-slider::-moz-range-thumb {
             <div class="cake-body"></div>
         </div>
 
-        <div class="blow-hint" id="blowHint">Tap the flame to make your wish ✨</div>
+        <div class="blow-meter-track"><div class="blow-meter-fill" id="blowMeterFill"></div></div>
+        <div class="blow-hint" id="blowHint">Tap "Enable Mic" or just tap the flame</div>
+
+        <button class="btn" id="micBtn" onclick="enableMic()" style="margin-top:10px;">🎤 Enable Mic</button>
 
         <br>
         <button class="btn" onclick="nextPage()" style="margin-top:10px;">Final Surprise 🎉</button>
@@ -1542,7 +1589,7 @@ input[type=range].love-slider::-moz-range-thumb {
 let currentPage = 1;
 const pageSequence = [
     "introPage", "page1", "page2", "reasonsPage", "quizPage", "paperPage",
-    "matchGamePage", "tapHeartsPage", "page4", "puzzlePage",
+    "loveMeterPage", "matchGamePage", "tapHeartsPage", "page4", "puzzlePage",
     "zodiacPage", "scratchPage", "candlePage", "page5"
 ];
 
@@ -1645,6 +1692,40 @@ function nextPage() {
     if (pageId === "page5") {
         setTimeout(createConfetti, 300);
         setTimeout(fireworks, 700);
+    }
+}
+
+/* ================= SWIPE + KEYBOARD NAVIGATION ================= */
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === "Enter") nextPage();
+});
+
+let touchStartX = 0;
+document.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+document.addEventListener("touchend", (e) => {
+    const touchEndX = e.changedTouches[0].screenX;
+    if (touchStartX - touchEndX > 60 && currentPage > 0) nextPage();
+}, { passive: true });
+
+/* ================= MUSIC TOGGLE ================= */
+
+function toggleMusic() {
+    const music = document.getElementById("birthdayMusic");
+    const btn = document.getElementById("musicToggle");
+    if (!music) return;
+
+    if (music.paused) {
+        music.play().catch(() => {});
+        btn.textContent = "🔊";
+        btn.classList.add("playing");
+    } else {
+        music.pause();
+        btn.textContent = "🔇";
+        btn.classList.remove("playing");
     }
 }
 
@@ -2281,7 +2362,7 @@ function spawnTapHeart() {
 
     const heart = document.createElement("div");
     heart.className = "tap-heart";
-    heart.textContent = "💣";
+    heart.textContent = ["💖", "💕", "💗", "❤️"][Math.floor(Math.random() * 4)];
 
     const maxX = arena.clientWidth - 30;
     const maxY = arena.clientHeight - 30;
@@ -2306,7 +2387,7 @@ function stopTapGame() {
 
     const arena = document.getElementById("tapArena");
     arena.innerHTML = `<div style="margin:auto; text-align:center;">
-        <div style="font-size:1.4rem; font-weight:600;">Score: ${tapGameScore} 💣</div>
+        <div style="font-size:1.4rem; font-weight:600;">Score: ${tapGameScore} 💘</div>
         <button class="btn" onclick="startTapGame()" style="margin-top:10px;">Play Again 🔁</button>
     </div>`;
     celebrate();
@@ -2433,13 +2514,50 @@ function checkPuzzleSolved() {
 }
 
 /* =====================================================
-   CANDLE TAP
+   CANDLE BLOW
 ===================================================== */
 
+let micStream = null;
+
+function enableMic() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        document.getElementById("blowHint").textContent = "Mic not supported — just tap the flame instead 🕯️";
+        return;
+    }
+
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+        micStream = stream;
+        document.getElementById("micBtn").style.display = "none";
+        document.getElementById("blowHint").textContent = "Blow now! 💨";
+
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const analyser = audioCtx.createAnalyser();
+        const source = audioCtx.createMediaStreamSource(stream);
+        source.connect(analyser);
+        analyser.fftSize = 512;
+        const data = new Uint8Array(analyser.frequencyBinCount);
+
+        function checkVolume() {
+            if (document.getElementById("candleFlame").classList.contains("out")) return;
+            analyser.getByteFrequencyData(data);
+            const avg = data.reduce((a, b) => a + b, 0) / data.length;
+            document.getElementById("blowMeterFill").style.width = Math.min(100, avg * 2) + "%";
+
+            if (avg > 35) {
+                blowOutCandle();
+                stream.getTracks().forEach(t => t.stop());
+                return;
+            }
+            requestAnimationFrame(checkVolume);
+        }
+        checkVolume();
+    }).catch(() => {
+        document.getElementById("blowHint").textContent = "Mic access denied — just tap the flame 🕯️";
+    });
+}
+
 function blowOutCandle() {
-    const flame = document.getElementById("candleFlame");
-    if (!flame || flame.classList.contains("out")) return;
-    flame.classList.add("out");
+    document.getElementById("candleFlame").classList.add("out");
     document.getElementById("blowHint").textContent = "Wish made! 🌟 Happy Birthday Monika!";
     vibrate([20, 30, 20]);
     celebrate();
@@ -2526,13 +2644,3 @@ if (window.matchMedia("(pointer: fine)").matches) {
 
 </body>
 </html>
-
-<style>
-/* iPhone-safe memory rendering */
-#page4 .carousel-wrap { transform: translateZ(0); contain: layout paint; }
-#page4 .carousel-track img { display:block; width:100%; height:auto; }
-@media (max-width:600px) {
-  #page4 .carousel-wrap { max-width:92vw; margin:6px auto; }
-  #page4 .carousel-track { transition:transform .3s ease; }
-}
-</style>
