@@ -862,6 +862,7 @@ p {
     height: 100%;
     transition: transform .5s cubic-bezier(.4,.2,.2,1);
     transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .match-card.flipped .match-card-inner,
@@ -947,6 +948,8 @@ p {
 
 .puzzle-piece.selected { outline: 3px solid #ff6fae; outline-offset: -3px; }
 
+#puzzlePage { padding-bottom: calc(70px + env(safe-area-inset-bottom)); }
+
 /* =====================================================
    NEW: ZODIAC / FACTS PAGE
 ===================================================== */
@@ -973,13 +976,14 @@ p {
 
 .cake-wrap {
     position: relative;
-    margin: 20px auto 10px;
-    width: 160px;
+    margin: 22px auto 4px;
+    width: 190px;
+    touch-action: manipulation;
 }
 
 .candle-flame {
-    width: 14px;
-    height: 26px;
+    width: 13px;
+    height: 24px;
     margin: 0 auto;
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
     background: radial-gradient(circle at 50% 70%, #fff59e, #ff9d3d 60%, #ff5c3d);
@@ -987,6 +991,8 @@ p {
     animation: flicker 1.1s ease-in-out infinite;
     transform-origin: bottom center;
     transition: opacity .4s ease, transform .4s ease;
+    position: relative;
+    z-index: 3;
 }
 
 @keyframes flicker {
@@ -1000,34 +1006,112 @@ p {
 }
 
 .candle-stick {
-    width: 10px;
-    height: 36px;
-    margin: -2px auto 0;
+    width: 9px;
+    height: 34px;
+    margin: -1px auto 0;
     background: repeating-linear-gradient(45deg, #ff9ed0, #ff9ed0 4px, #ffd4ea 4px, #ffd4ea 8px);
     border-radius: 2px;
-}
-
-.cake-body {
-    width: 160px;
-    height: 90px;
-    margin-top: -2px;
-    border-radius: 10px 10px 26px 26px;
-    background: linear-gradient(180deg, #fff0dd, #f5c98d 40%, #e0a565);
     position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    z-index: 3;
+    box-shadow: 0 2px 4px rgba(0,0,0,.25);
 }
 
-.cake-body::before {
+/* ---- Top tier ---- */
+.cake-top {
+    width: 108px;
+    height: 52px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    border-radius: 8px 8px 4px 4px;
+    background:
+        radial-gradient(circle at 18% 28%, #7fd8ff 0 3px, transparent 4px),
+        radial-gradient(circle at 82% 22%, #ffe066 0 3px, transparent 4px),
+        radial-gradient(circle at 55% 18%, #ff8fc4 0 3px, transparent 4px),
+        radial-gradient(circle at 35% 55%, #b98bff 0 3px, transparent 4px),
+        radial-gradient(circle at 68% 60%, #7fe0b0 0 3px, transparent 4px),
+        linear-gradient(180deg, #ffeef6 0%, #ffc9e2 55%, #ff9fcb 100%);
+    box-shadow: inset 0 -8px 12px rgba(200,40,110,.25), inset 0 2px 3px rgba(255,255,255,.6);
+}
+
+/* frosting cap on top tier */
+.cake-top::before {
     content: "";
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 14px;
-    background: repeating-linear-gradient(90deg, #ff8fc4, #ff8fc4 10px, #fff 10px, #fff 20px);
-    border-radius: 10px 10px 0 0;
+    left: -4px; right: -4px; top: -9px;
+    height: 18px;
+    border-radius: 50% 50% 40% 40% / 70% 70% 30% 30%;
+    background: linear-gradient(180deg, #fffdf9, #ffeef8 70%);
+    box-shadow: inset 0 -3px 4px rgba(230,150,190,.35);
 }
 
-.blow-hint { font-size: .8rem; opacity: .75; margin-top: 12px; min-height: 1.3em; }
-.cake-wrap { touch-action: manipulation; }
+/* drips off the bottom edge of the top tier's frosting */
+.cake-top::after {
+    content: "";
+    position: absolute;
+    left: -2px; right: -2px; bottom: -12px;
+    height: 16px;
+    background:
+        radial-gradient(circle at 10% 0%, #fffdf9 0 6px, transparent 7px),
+        radial-gradient(circle at 28% 0%, #fffdf9 0 9px, transparent 10px),
+        radial-gradient(circle at 48% 0%, #fffdf9 0 5px, transparent 6px),
+        radial-gradient(circle at 66% 0%, #fffdf9 0 8px, transparent 9px),
+        radial-gradient(circle at 85% 0%, #fffdf9 0 6px, transparent 7px);
+    background-repeat: no-repeat;
+    pointer-events: none;
+}
+
+/* ---- Bottom tier ---- */
+.cake-bottom {
+    width: 190px;
+    height: 66px;
+    margin: 6px auto 0;
+    position: relative;
+    z-index: 1;
+    border-radius: 8px 8px 20px 20px;
+    background: linear-gradient(180deg, #fff3e0 0%, #f7c98a 45%, #e2a15f 100%);
+    box-shadow: inset 0 -12px 16px rgba(170,95,30,.3), inset 0 2px 3px rgba(255,255,255,.5), 0 14px 26px rgba(0,0,0,.4);
+}
+
+/* icing drips along top edge of bottom tier */
+.cake-bottom::before {
+    content: "";
+    position: absolute;
+    left: -4px; right: -4px; top: -10px;
+    height: 20px;
+    background:
+        radial-gradient(circle at 6% 40%, #fffdf9 0 7px, transparent 8px),
+        radial-gradient(circle at 22% 40%, #fffdf9 0 5px, transparent 6px),
+        radial-gradient(circle at 38% 40%, #fffdf9 0 9px, transparent 10px),
+        radial-gradient(circle at 54% 40%, #fffdf9 0 6px, transparent 7px),
+        radial-gradient(circle at 70% 40%, #fffdf9 0 8px, transparent 9px),
+        radial-gradient(circle at 86% 40%, #fffdf9 0 6px, transparent 7px),
+        radial-gradient(circle at 97% 40%, #fffdf9 0 5px, transparent 6px);
+    background-repeat: no-repeat;
+    pointer-events: none;
+}
+
+/* fondant "ribbon" band near the base */
+.cake-bottom::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 14px;
+    height: 8px;
+    background: repeating-linear-gradient(90deg, #ff8fc4 0 12px, #ffd4ea 12px 24px);
+    opacity: .85;
+}
+
+/* ---- Plate ---- */
+.cake-plate {
+    width: 220px;
+    height: 16px;
+    margin: 4px auto 0;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #ffffff, #d9dbe4);
+    box-shadow: 0 10px 18px rgba(0,0,0,.4), inset 0 -3px 5px rgba(0,0,0,.12), inset 0 2px 2px rgba(255,255,255,.9);
+}
+
+.blow-hint { font-size: .8rem; opacity: .75; margin-top: 14px; min-height: 1.3em; }
 
 /* =====================================================
    NEW: PHOTO CAROUSEL (replaces static memory grid)
@@ -1271,7 +1355,6 @@ p {
         <div id="quizResult" style="display:none;">
             <div class="quiz-score-badge" id="quizScoreBadge">0/5</div>
             <p id="quizScoreMsg">Result...</p>
-            <button class="btn" onclick="restartQuiz()" style="margin-right:8px;">Retry 🔁</button>
             <button class="btn" onclick="nextPage()">Continue ➜</button>
         </div>
     </div>
@@ -1481,7 +1564,9 @@ p {
         <div class="cake-wrap" id="cakeWrap" onclick="blowOutCandle()" style="cursor:pointer;">
             <div class="candle-flame" id="candleFlame"></div>
             <div class="candle-stick"></div>
-            <div class="cake-body"></div>
+            <div class="cake-top"></div>
+            <div class="cake-bottom"></div>
+            <div class="cake-plate"></div>
         </div>
 
         <div class="blow-hint" id="blowHint"></div>
@@ -2067,28 +2152,28 @@ function vibrate(ms) {
 
 const quizQuestions = [
     {
-        q: "Monika ka favorite color kya hai?",
-        options: ["[Option A]", "[Option B]", "[Option C]", "[Option D]"],
+        q: "Vishal ka fvrt color kaunsa hai?",
+        options: ["[Red]", "[Blue]", "[Yellow]", "[Black]"],
         correct: 0
     },
     {
-        q: "Monika ki favorite movie/show kaunsi hai?",
-        options: ["[Option A]", "[Option B]", "[Option C]", "[Option D]"],
+        q: "Vishal ka fvrt singer?",
+        options: ["[Arijit Singh]", "[Darshan Raval]", "[Sonu Nigam]", "[Jubin Nautiyal]"],
         correct: 1
     },
     {
-        q: "Monika ka favorite food kya hai?",
-        options: ["[Option A]", "[Option B]", "[Option C]", "[Option D]"],
+        q: "Vishal ke manpasand log?",
+        options: ["[Friendly]", "[Helpfull]", "[Honest]", "[Beautiful]"],
         correct: 2
     },
     {
-        q: "Hum pehli baar kab mile the?",
-        options: ["[Option A]", "[Option B]", "[Option C]", "[Option D]"],
+        q: "Vishal ka fvrt fast food?",
+        options: ["[Momo]", "[chowmin]", "[Spring Roll]", "[Kebab]"],
         correct: 0
     },
     {
-        q: "Monika ka dream destination kya hai?",
-        options: ["[Option A]", "[Option B]", "[Option C]", "[Option D]"],
+        q: "Vishal ko Monika kaunse suit mai sabse jyada ahhi lght hi?",
+        options: ["[Purple]", "[Blue]", "[Black]", "[Pink]"],
         correct: 3
     }
 ];
@@ -2197,6 +2282,11 @@ function initMatchGame() {
         card.addEventListener("click", () => flipMatchCard(card));
         grid.appendChild(card);
     });
+
+    // Force a reflow so the flip transition fires correctly on the very
+    // first tap (fixes a mobile browser quirk where newly-inserted 3D
+    // transform elements skip their first transition).
+    void grid.offsetHeight;
 }
 
 function flipMatchCard(card) {
@@ -2303,7 +2393,6 @@ function stopTapGame() {
     const arena = document.getElementById("tapArena");
     arena.innerHTML = `<div style="margin:auto; text-align:center;">
         <div style="font-size:1.4rem; font-weight:600;">Score: ${tapGameScore} 💣</div>
-        <button class="btn" onclick="startTapGame()" style="margin-top:10px;">Play Again 🔁</button>
     </div>`;
     celebrate();
 }
