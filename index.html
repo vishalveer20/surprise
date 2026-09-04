@@ -1041,7 +1041,7 @@ p {
             <br><br>
             May God fulfill all your dreams. ✨
             <br><br>
-            So here's a little surprise journey, created especially for you. 💖
+            So here's a little journey of surprise, created especially for you. 💖
         </p>
         <button class="btn" onclick="nextPage()">Begin The Surprise 🎁</button>
     </div>
@@ -1151,8 +1151,8 @@ p {
             <div class="drag-paper paper-secret" data-stack-paper data-index="4" style="--paper-rot:-3deg; z-index:1;">
                 <span class="paper-number"></span>
                 <div class="cover-text">
-                    <p>One of God’s greatest gifts,</p>
-                    <p>is having a bestie like you, Monika.❤️</p>
+                    <p>Friendship doesn’t need special people;</p>
+                    <p>it makes people special.❤️</p>
                     <div class="paper-small">Drag this one away too...</div>
                 </div>
                 <div class="secret-text">
@@ -1299,7 +1299,7 @@ p {
 
         <div class="scratch-wrap" id="scratchWrap">
             <div class="scratch-reveal">
-                <p>Open the box and look under the basket of flowers.</p>
+                <p>Open the gift box, take out the slip attached to the bottom of the basket, and check it.</p>
             </div>
             <canvas id="scratchCanvas"></canvas>
         </div>
@@ -1349,7 +1349,7 @@ p {
             <br><br>
             Keep smiling. Keep shining.
             <br><br>
-            And have the most amazing birthday ever! 🥳💖
+            
         </p>
         <button class="btn" onclick="celebrate()">Celebrate Again 🎊</button>
     </div>
@@ -1913,7 +1913,7 @@ function showQuizResult() {
 
     let msg = "";
     const pct = quizScore / quizQuestions.length;
-    if (pct === 1) msg = "Perfect score! You truly know him. 💯💗";
+    if (pct === 1) msg = "Perfect score! You truly know me.❤️💫";
     else if (pct >= 0.6) msg = "Not bad! Pretty good understanding. 😄";
     else msg = "Hehe, thoda aur time saath bitao! 😜";
 
@@ -2139,7 +2139,7 @@ function initPuzzle() {
 function applyPuzzlePieceStyle(piece, pieceIdx) {
     const row = Math.floor(pieceIdx / PUZZLE_SIZE);
     const col = pieceIdx % PUZZLE_SIZE;
-    piece.style.backgroundImage = "url('monika-dp.jpg')";
+    piece.style.backgroundImage = "url('puzzle.jpg')";
     piece.style.backgroundPosition = `${(col * 100) / (PUZZLE_SIZE - 1)}% ${(row * 100) / (PUZZLE_SIZE - 1)}%`;
 }
 
