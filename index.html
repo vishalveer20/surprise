@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>For You, Princess ❤️</title>
+<link rel="preload" as="image" href="puzzle.jpg">
+<link rel="preload" as="image" href="secret.png">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&family=Zeyada&display=swap');
@@ -1425,7 +1427,7 @@ function nextPage() {
     const pageId = pageSequence[currentPage];
 
     if (pageId === "paperPage") renderPaperStack();
-    if (pageId === "scratchPage") setTimeout(initScratchCard, 150);
+    if (pageId === "scratchPage") requestAnimationFrame(initScratchCard);
     if (pageId === "quizPage") renderQuizQuestion();
     if (pageId === "matchGamePage") setTimeout(initMatchGame, 100);
     if (pageId === "page4") setTimeout(initCarousel, 100);
